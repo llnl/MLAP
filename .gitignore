@@ -1,0 +1,20 @@
+# Local reference material and simulation outputs (not for distribution)
+ForClaude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+.virtual_documents/
+
+# OS / editor
+.DS_Store
+._*
+*.swp
+.idea/
+.vscode/
