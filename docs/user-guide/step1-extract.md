@@ -98,6 +98,49 @@ everything available in the dataset:
 | `FM_100hr` | 100-hour fuel moisture |
 | `FM_1000hr` | 1000-hour fuel moisture |
 
+## Example dataset definitions
+
+The parameters above combine to define a dataset. These are the datasets
+extracted from the 21-year record for the studies in the MLAP software paper,
+showing how the settings translate into data volume and feature count.
+
+| Dataset | \(t_{max\_history}\) (h) | \(t_{history}\) (h) | History times | Reference times | Grid points per time | Rows extracted | QoIs | Features |
+|---|---|---|---|---|---|---|---|---|
+| 41 | 32 | 4 | 8 | 2,000 | 3,000 | 6,000,000 | 5 | 41 |
+| 42 | 32 | 4 | 8 | 2,000 | 4,000 | 8,000,000 | 5 | 41 |
+| 43 | 32 | 4 | 8 | 3,000 | 1,000 | 3,000,000 | 5 | 41 |
+| 44 | 32 | 4 | 8 | 3,000 | 2,000 | 6,000,000 | 5 | 41 |
+| 59 | 36 | 4 | 9 | 2,000 | 4,000 | 8,000,000 | 5 | 46 |
+| 60 | 40 | 4 | 10 | 2,000 | 4,000 | 8,000,000 | 5 | 51 |
+| 61 | 44 | 4 | 11 | 2,000 | 4,000 | 8,000,000 | 5 | 56 |
+| 62 | 48 | 4 | 12 | 2,000 | 4,000 | 8,000,000 | 5 | 61 |
+
+"QoIs" counts the time-varying quantities only; elevation is extracted separately
+and is fixed in time.
+
+Two relationships hold across every row, and are worth checking when defining a
+new dataset:
+
+$$
+n_{rows} = n_{reference\ times} \times n_{grid\ points}
+$$
+
+$$
+n_{features} = n_{history\ times} \times n_{QoIs} + 1
+$$
+
+Datasets 41–44 hold the history parameters fixed and vary only the sampling
+counts. Datasets 59–62 do the reverse, holding sampling fixed at 2,000 × 4,000
+while \(t_{max\_history}\) grows from 36 to 48 hours — which is what drives the
+feature count from 46 up to 61.
+
+!!! note "Dataset numbering is a convention, not a registry"
+    These identifiers are simply the `data_set_count` values used for those runs.
+    Numbers are assigned as studies are created and are not contiguous — the
+    [Science](../science/overview.md) section draws on datasets 39, 45, 46, 49,
+    53, 63–66 and 79–81 as well. Dataset 41 appears both here and there, with the
+    same definition of 2,000 reference times by 3,000 grid points.
+
 ## Reading other data sources
 
 MLAP can extract from datasets other than the SJSU reanalysis by mapping their
