@@ -2,6 +2,33 @@
 - This is developed for wildfire analysis to begin with
 - Architected in a way that it can be adapted to other ML problems.
 
+# Documentation
+Full documentation: **https://llnl.github.io/MLAP/**
+
+- [User Guide](https://llnl.github.io/MLAP/user-guide/installation/) — installation and a page per pipeline step
+- [JSON Reference](https://llnl.github.io/MLAP/user-guide/json-reference/) — every input parameter, searchable
+- [Scientific Assessment](https://llnl.github.io/MLAP/science/overview/) — what the simulations show
+
+The pipeline has five stages, each driven by a JSON input file:
+
+| Step | Purpose |
+|---|---|
+| 1 | Extract a subsampled training set from 21 years of raw data |
+| 2 | Prepare features and labels for regression or classification |
+| 3 | Train ML models and compute metrics |
+| 4 | Compare many models across many datasets |
+| 5 | Predict fuel moisture at a chosen time and region |
+
+Source lives in `MachineLearningAutomationPipleline/`; `Others/` holds archived
+and miscellaneous code that is not part of the pipeline.
+
+To build the documentation locally:
+
+```bash
+pip install -r requirements-docs.txt
+mkdocs serve
+```
+
 # Sponsorship
 This work was performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract `DE-AC52-07NA27344` and was supported by the LLNL-LDRD Program under Project No. `22-SI-008.`
 
