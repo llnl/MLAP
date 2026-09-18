@@ -5,7 +5,8 @@ site_url: https://llnl.github.io/MLAP/
 repo_url: https://github.com/LLNL/MLAP
 repo_name: LLNL/MLAP
 copyright: >-
-  Copyright &copy; Lawrence Livermore National Laboratory &middot;
+  Pankaj K. Jha &middot; Lawrence Livermore National Laboratory &middot;
+  <a href="https://github.com/LLNL/MLAP">github.com/LLNL/MLAP</a> &middot;
   MIT License &middot; LLNL-CODE-2001016
 
 docs_dir: docs
@@ -13,12 +14,13 @@ docs_dir: docs
 theme:
   name: material
   features:
-    - navigation.sections
+    - navigation.expand
     - navigation.top
     - navigation.tracking
     - content.code.copy
     - search.highlight
     - search.suggest
+    - toc.integrate
     - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -45,6 +47,7 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+      toc_depth: 3
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.blocks.caption
@@ -66,19 +69,23 @@ nav:
   - Home: index.md
   - Design Assessment: design-assessment.md
   - User Guide:
-      - Installation: user-guide/installation.md
-      - "Step 1: Extract Data": user-guide/step1-extract.md
-      - "Step 2: Prepare Data": user-guide/step2-prepare.md
-      - "Step 3: Train Models": user-guide/step3-train.md
-      - "Step 4: Evaluate Models": user-guide/step4-evaluate.md
-      - "Step 5: Analyze and Predict": user-guide/step5-analyze.md
-      - Running on HPC: user-guide/running-on-hpc.md
-      - JSON Reference: user-guide/json-reference.md
+      - Getting Started:
+          - Installation: user-guide/installation.md
+          - Running on HPC: user-guide/running-on-hpc.md
+      - Pipeline Steps:
+          - "Step 1: Extract Data": user-guide/step1-extract.md
+          - "Step 2: Prepare Data": user-guide/step2-prepare.md
+          - "Step 3: Train Models": user-guide/step3-train.md
+          - "Step 4: Evaluate Models": user-guide/step4-evaluate.md
+          - "Step 5: Analyze and Predict": user-guide/step5-analyze.md
+      - Reference:
+          - JSON Reference: user-guide/json-reference.md
   - Science:
       - Overview: science/overview.md
-      - Data Sampling: science/data-sampling.md
-      - Historical Data: science/history.md
-      - ML Parameters: science/ml-parameters.md
-      - Physical Quantities: science/physical-quantities.md
+      - Assessments:
+          - Data Sampling: science/data-sampling.md
+          - Historical Data: science/history.md
+          - ML Parameters: science/ml-parameters.md
+          - Physical Quantities: science/physical-quantities.md
   - Development:
       - Contributing: development/contributing.md
