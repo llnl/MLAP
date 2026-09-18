@@ -27,7 +27,7 @@ afterwards.
 Both `submit_multiple_runs.py` and [Step 4](step4-evaluate.md) reconstruct file
 paths from a simulation directory plus these identifiers, so the layout matters:
 
-```
+```text
 <sim_dir>/
 └── InputJson/
     ├── Extract/  json_extract_data_039.json, _040.json, …

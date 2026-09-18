@@ -115,17 +115,28 @@ hyperparameters, and the choice of physical quantities.
 
     [Read the full assessment](design-assessment.md){ .md-button .md-button--primary }
 
-## Citing and licensing
+## Project, repository, and authorship
 
-MLAP is developed at Lawrence Livermore National Laboratory.
+MLAP is developed by **Pankaj K. Jha** at **Lawrence Livermore National
+Laboratory (LLNL)**.
 
-- **Release ID:** LLNL-CODE-2001016
-- **Title:** Machine Learning Automation Pipeline (MLAP), v 1.0
-- **Author:** Pankaj K. Jha
-- **License:** MIT
-- **Repository:** <https://github.com/LLNL/MLAP>
+| | |
+|---|---|
+| **Author** | Pankaj K. Jha |
+| **Institution** | Lawrence Livermore National Laboratory (LLNL) |
+| **Main repository** | <https://github.com/LLNL/MLAP> |
+| **Documentation site** | <https://llnl.github.io/MLAP/> |
+| **Development mirror** | <https://pkjha-aero.github.io/Wildfire_ML/> |
+| **Release ID** | LLNL-CODE-2001016 |
+| **Release title** | Machine Learning Automation Pipeline (MLAP), v 1.0 |
+| **License** | MIT |
+| **Contact** | pankaj.psu@gmail.com (primary), jha3@llnl.gov |
 
-Contact: Pankaj K. Jha — pankaj.psu@gmail.com (primary), jha3@llnl.gov
+!!! note "Two documentation URLs"
+    `llnl.github.io/MLAP` is the canonical home, served from the main repository
+    once GitHub Pages is enabled there. `pkjha-aero.github.io/Wildfire_ML` is the
+    author's development mirror, built from the same sources, and is currently
+    where the site is live.
 
 !!! note "Sponsorship"
     This work was performed under the auspices of the U.S. Department of Energy
