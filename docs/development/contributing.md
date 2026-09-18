@@ -73,8 +73,9 @@ mkdocs build --strict # what CI runs; fails on broken links
 Pages live under `docs/`, and the navigation is defined in `mkdocs.yml` — a new
 page needs an entry there or `--strict` will flag it.
 
-The site is published by `.github/workflows/docs.yml`, which builds on every push
-to `master` or `development` and deploys to GitHub Pages from `master`.
+The site is published by `.github/workflows/docs.yml`, which builds and deploys
+to GitHub Pages on every push to `master` or `development`. Both branches publish
+to the same site, so whichever pushes last is what `llnl.github.io/MLAP` serves.
 
 ## Documenting results
 
