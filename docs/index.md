@@ -96,12 +96,24 @@ hyperparameters, and the choice of physical quantities.
 
 ## Design assessment
 
-MLAP's naming conventions exist to keep large parametric studies interpretable
-long after they are run. The [Design Assessment](design-assessment.md) records an
-independent review that tested this directly: given 594 MB of accumulated output
-and no access to the machine that produced it, every result could be traced back
-to the configuration that generated it — and fourteen parameter studies that had
-never been written up were recovered from the output alone.
+!!! success "Independently reviewed — 8/10 for automation design"
+
+    MLAP's naming conventions exist to keep large parametric studies
+    interpretable long after they are run. An independent review tested that
+    claim directly: given **594 MB of accumulated output** and no access to the
+    machine that produced it, could every number be traced back to the
+    configuration that generated it?
+
+    - **~8,600 output files** across 27 evaluation collections — every artifact
+      traceable to its dataset, label, and model from filenames alone
+    - **Two independently assembled collections cross-validated** — dataset 41
+      reports an identical R² of 0.8906 in both, agreement that was not designed
+      in
+    - **Fourteen parameter studies** existing only as output, never written up,
+      were recovered in full — including the largest hyperparameter effect in the
+      assessment
+
+    [Read the full assessment](design-assessment.md){ .md-button .md-button--primary }
 
 ## Citing and licensing
 
@@ -113,7 +125,7 @@ MLAP is developed at Lawrence Livermore National Laboratory.
 - **License:** MIT
 - **Repository:** <https://github.com/LLNL/MLAP>
 
-Contact: Pankaj K. Jha — jha3@llnl.gov
+Contact: Pankaj K. Jha — pankaj.psu@gmail.com (primary), jha3@llnl.gov
 
 !!! note "Sponsorship"
     This work was performed under the auspices of the U.S. Department of Energy

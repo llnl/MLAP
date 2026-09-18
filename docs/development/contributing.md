@@ -91,4 +91,4 @@ disappeared under that check.
 
 Issues and pull requests: <https://github.com/LLNL/MLAP>
 
-Contact: Pankaj K. Jha — jha3@llnl.gov
+Contact: Pankaj K. Jha — pankaj.psu@gmail.com (primary), jha3@llnl.gov
