@@ -218,8 +218,10 @@ navigation and search verified.
      were produced but **will not run against the current code**. They must not
      be reused as example configs in the docs without updating the key.
 
-3. **Undocumented config key.** The code reads `ref_time_indices`, which the
-   repo's sample config does not define.
+3. **Paper omits a scaler option.** EMS Table 6 lists `MinMax`, `MaxAbs` and
+   `Robust` while stating that four scalers are available. The code supports a
+   fourth, `Standard`, which is what the repository's Random Forest
+   configuration actually uses. Docs document all four.
 
 4. **Notebook / script staleness.** `Extract_DFM_Data.ipynb` is newer than its
    generated `Extract_DFM_Data.py`, which is what sbatch actually runs.
