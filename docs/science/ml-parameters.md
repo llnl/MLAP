@@ -70,7 +70,7 @@ from 100 to 150 changes R² by at most 0.0001 while costing 50% more training ti
 The scikit-learn default of 100 is a good choice here. There is no benefit to
 tuning this upward.
 
-### Effect of max_features
+### Effect of `max_features`
 
 | `max_features` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
@@ -86,7 +86,7 @@ This is worth noting because `sqrt` is the scikit-learn default for
 *classification* — applying that habit to this regression problem would cost
 close to a percentage point.
 
-### Effect of bootstrap
+### Effect of `bootstrap`
 
 | `bootstrap` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
@@ -121,7 +121,7 @@ The MLP was configured from the baseline in the software paper:
 rate, `learning_rate_init` 0.001, `max_iter` 500, `shuffle` true, `tol` 1e-3.
 Each study varies one parameter from that baseline.
 
-### Effect of solver
+### Effect of `solver`
 
 | `solver` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|

@@ -2,7 +2,7 @@
 
 ## Repository layout
 
-```
+```text
 MachineLearningAutomationPipleline/   The pipeline — Step1..Step5, SimulationScripts
 Others/                               Archived and miscellaneous code, not part of the pipeline
 docs/                                 This documentation

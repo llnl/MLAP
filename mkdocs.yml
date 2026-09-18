@@ -11,6 +11,12 @@ copyright: >-
 
 docs_dir: docs
 
+validation:
+  links:
+    anchors: warn
+    absolute_links: info
+    unrecognized_links: warn
+
 theme:
   name: material
   features:

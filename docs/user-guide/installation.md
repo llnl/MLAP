@@ -22,7 +22,7 @@ cd MLAP
 
 The pipeline lives in `MachineLearningAutomationPipleline/`:
 
-```
+```text
 MachineLearningAutomationPipleline/
 ├── Step1_ExtractData/
 ├── Step2_PrepareData/
