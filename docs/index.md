@@ -94,6 +94,15 @@ The [Science](science/overview.md) section documents what the simulations show:
 how prediction accuracy responds to data sampling, history parameters, ML
 hyperparameters, and the choice of physical quantities.
 
+## Design assessment
+
+MLAP's naming conventions exist to keep large parametric studies interpretable
+long after they are run. The [Design Assessment](design-assessment.md) records an
+independent review that tested this directly: given 594 MB of accumulated output
+and no access to the machine that produced it, every result could be traced back
+to the configuration that generated it — and fourteen parameter studies that had
+never been written up were recovered from the output alone.
+
 ## Citing and licensing
 
 MLAP is developed at Lawrence Livermore National Laboratory.
