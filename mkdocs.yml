@@ -64,6 +64,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Design Assessment: design-assessment.md
   - User Guide:
       - Installation: user-guide/installation.md
       - "Step 1: Extract Data": user-guide/step1-extract.md

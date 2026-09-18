@@ -1,6 +1,9 @@
 # Local reference material and simulation outputs (not for distribution)
 ForClaude/
 
+# Internal working notes
+IMPROVEMENT_SCOPE.md
+
 # Python
 __pycache__/
 *.py[cod]
