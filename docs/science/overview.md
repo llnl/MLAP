@@ -27,14 +27,21 @@ scatter between datasets, that is said explicitly.
     the simulation output exists in full, and those sections are marked with a
     note. Both are drawn from the same CSVs.
 
-## What is assessed
+## Assessment performed
 
-| Study | Question |
-|---|---|
-| [Data Sampling](data-sampling.md) | How many reference times and grid points are needed? |
-| [Historical Data](history.md) | How far back must atmospheric history reach, and how finely sampled? |
-| [ML Parameters](ml-parameters.md) | Which Random Forest and MLP hyperparameters matter? |
-| [Physical Quantities](physical-quantities.md) | Which atmospheric variables actually carry the signal? |
+Four groups of studies were run, spanning 27 evaluation collections and drawing
+on datasets from 1 to 15 million rows.
+
+| Study | Question | Scope |
+|---|---|---|
+| [Data Sampling](data-sampling.md) | How many reference times and grid points are needed? | 7 datasets, 2–15 million rows |
+| [Historical Data](history.md) | How far back must atmospheric history reach, and how finely sampled? | 9 datasets; 32–48 h maximum history, 1–8 h interval |
+| [ML Parameters](ml-parameters.md) | Which Random Forest and MLP hyperparameters matter? | 12 hyperparameter studies, each across 3 datasets |
+| [Physical Quantities](physical-quantities.md) | Which atmospheric variables actually carry the signal? | 3 feature studies across 4 datasets |
+
+Every hyperparameter and feature study was repeated on more than one dataset, so
+an effect that does not reproduce across all of them is reported as
+unestablished rather than as a finding.
 
 ## Headline findings
 
