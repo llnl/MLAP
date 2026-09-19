@@ -89,7 +89,7 @@ nav:
           - "Step 5: Analyze and Predict": user-guide/step5-analyze.md
       - Reference:
           - JSON Reference: user-guide/json-reference.md
-  - Science:
+  - Science with MLAP:
       - Overview: science/overview.md
       - Assessments:
           - Data Sampling: science/data-sampling.md

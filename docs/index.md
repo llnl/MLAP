@@ -90,9 +90,9 @@ atmospheric variables are available and mapped in the extract step.
 
 ## Scientific results
 
-The [Science](science/overview.md) section documents what the simulations show:
-how prediction accuracy responds to data sampling, history parameters, ML
-hyperparameters, and the choice of physical quantities.
+The [Science with MLAP](science/overview.md) section documents what the
+simulations show: how prediction accuracy responds to data sampling, history
+parameters, ML hyperparameters, and the choice of physical quantities.
 
 ## Design assessment
 
