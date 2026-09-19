@@ -75,7 +75,7 @@ page needs an entry there or `--strict` will flag it.
 
 The site is published by `.github/workflows/docs.yml`, which builds and deploys
 to GitHub Pages on every push to `master` or `development`. Both branches publish
-to the same site, so whichever pushes last is what `llnl.github.io/MLAP` serves.
+to the same site, so whichever pushes last is what gets served.
 
 ## Documenting results
 
