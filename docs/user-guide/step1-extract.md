@@ -137,7 +137,7 @@ feature count from 46 up to 61.
 !!! note "Dataset numbering is a convention, not a registry"
     These identifiers are simply the `data_set_count` values used for those runs.
     Numbers are assigned as studies are created and are not contiguous — the
-    [Science](../science/overview.md) section draws on datasets 39, 45, 46, 49,
+    [Science with MLAP](../science/overview.md) section draws on datasets 39, 45, 46, 49,
     53, 63–66 and 79–81 as well. Dataset 41 appears both here and there, with the
     same definition of 2,000 reference times by 3,000 grid points.
 

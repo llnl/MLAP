@@ -90,9 +90,9 @@ atmospheric variables are available and mapped in the extract step.
 
 ## Scientific results
 
-The [Science](science/overview.md) section documents what the simulations show:
-how prediction accuracy responds to data sampling, history parameters, ML
-hyperparameters, and the choice of physical quantities.
+The [Science with MLAP](science/overview.md) section documents what the
+simulations show: how prediction accuracy responds to data sampling, history
+parameters, ML hyperparameters, and the choice of physical quantities.
 
 ## Design assessment
 
@@ -125,18 +125,22 @@ Laboratory (LLNL)**.
 | **Author** | Pankaj K. Jha |
 | **Institution** | Lawrence Livermore National Laboratory (LLNL) |
 | **Main repository** | <https://github.com/LLNL/MLAP> |
-| **Documentation site** | <https://llnl.github.io/MLAP/> |
-| **Development mirror** | <https://pkjha-aero.github.io/Wildfire_ML/> |
+| **Documentation site** | **[Not yet live]** <https://software.llnl.gov/MLAP/> |
+| **Development mirror** | **[Live and up-to-date]** <https://pkjha-aero.github.io/Wildfire_ML/> |
 | **Release ID** | LLNL-CODE-2001016 |
 | **Release title** | Machine Learning Automation Pipeline (MLAP), v 1.0 |
 | **License** | MIT |
 | **Contact** | pankaj.psu@gmail.com (primary), jha3@llnl.gov |
 
 !!! note "Two documentation URLs"
-    `llnl.github.io/MLAP` is the canonical home, served from the main repository
-    once GitHub Pages is enabled there. `pkjha-aero.github.io/Wildfire_ML` is the
-    author's development mirror, built from the same sources, and is currently
-    where the site is live.
+    **`software.llnl.gov/MLAP`** is the canonical home. LLNL serves its GitHub
+    Pages under that domain, so `llnl.github.io/MLAP` redirects there. It is
+    **not yet live** — GitHub Pages has still to be enabled on the main
+    repository, which needs organisation-level access.
+
+    **`pkjha-aero.github.io/Wildfire_ML`** is the author's development mirror,
+    built from the same sources. It is **live and current**, and is where the
+    documentation can be read today.
 
 !!! note "Sponsorship"
     This work was performed under the auspices of the U.S. Department of Energy

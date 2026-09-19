@@ -72,7 +72,7 @@ unresolvable, and the result would have had to be discarded.
 Fourteen parameter studies existed only as simulation output, having never been
 written up: four Random Forest hyperparameter studies, eight MLP studies, and two
 feature-selection studies. All fourteen were reconstructed from the CSVs alone
-and are documented in the [Science](science/overview.md) section.
+and are documented in the [Science with MLAP](science/overview.md) section.
 
 Among them was the largest single hyperparameter effect in the entire assessment
 — disabling Random Forest `bootstrap` costs 9–12 percentage points of R² — which

@@ -3,11 +3,21 @@
 - Architected in a way that it can be adapted to other ML problems.
 
 # Documentation
-Full documentation: **https://llnl.github.io/MLAP/**
 
-- [User Guide](https://llnl.github.io/MLAP/user-guide/installation/) — installation and a page per pipeline step
-- [JSON Reference](https://llnl.github.io/MLAP/user-guide/json-reference/) — every input parameter, searchable
-- [Scientific Assessment](https://llnl.github.io/MLAP/science/overview/) — what the simulations show
+| Site | Status | URL |
+|---|---|---|
+| Documentation site | **[Not yet live]** | https://software.llnl.gov/MLAP/ |
+| Development mirror | **[Live and up-to-date]** | https://pkjha-aero.github.io/Wildfire_ML/ |
+
+`software.llnl.gov/MLAP` is the canonical home — LLNL serves its GitHub Pages
+under that domain, so `llnl.github.io/MLAP` redirects there. It goes live once
+GitHub Pages is enabled on this repository. Until then, read the documentation
+at the development mirror, which is built from the same sources:
+
+- [User Guide](https://pkjha-aero.github.io/Wildfire_ML/user-guide/installation/) — installation and a page per pipeline step
+- [JSON Reference](https://pkjha-aero.github.io/Wildfire_ML/user-guide/json-reference/) — every input parameter, searchable
+- [Scientific Assessment](https://pkjha-aero.github.io/Wildfire_ML/science/overview/) — what the simulations show
+- [Design Assessment](https://pkjha-aero.github.io/Wildfire_ML/design-assessment/) — independent review of the automation architecture
 
 The pipeline has five stages, each driven by a JSON input file:
 
@@ -49,7 +59,19 @@ and shall not be used for advertising or product endorsement purposes.
 # License
 This software package is an Unclassified/Open-Source Distribution under the terms of the MIT license and has been approved by Lawrence Livermore National Laboratory for unrestricted release.
 
-# Lawrence Livermore Release Details
-- Release ID: LLNL-CODE-2001016
-- Title: Machine Learning Automation Pipeline (MLAP), v 1.0
-- Author(s): Pankaj Jha
+# Project, repository, and authorship
+
+MLAP is developed by **Pankaj K. Jha** at **Lawrence Livermore National
+Laboratory (LLNL)**.
+
+| | |
+|---|---|
+| **Author** | Pankaj K. Jha |
+| **Institution** | Lawrence Livermore National Laboratory (LLNL) |
+| **Main repository** | https://github.com/LLNL/MLAP |
+| **Documentation site** | **[Not yet live]** https://software.llnl.gov/MLAP/ |
+| **Development mirror** | **[Live and up-to-date]** https://pkjha-aero.github.io/Wildfire_ML/ |
+| **Release ID** | LLNL-CODE-2001016 |
+| **Release title** | Machine Learning Automation Pipeline (MLAP), v 1.0 |
+| **License** | MIT |
+| **Contact** | pankaj.psu@gmail.com (primary), jha3@llnl.gov |

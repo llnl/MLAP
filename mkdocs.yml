@@ -1,7 +1,7 @@
 site_name: MLAP
 site_description: >-
   Machine Learning Automation Pipeline for wildfire fuel moisture prediction
-site_url: https://llnl.github.io/MLAP/
+site_url: https://software.llnl.gov/MLAP/
 repo_url: https://github.com/LLNL/MLAP
 repo_name: LLNL/MLAP
 copyright: >-
@@ -89,7 +89,7 @@ nav:
           - "Step 5: Analyze and Predict": user-guide/step5-analyze.md
       - Reference:
           - JSON Reference: user-guide/json-reference.md
-  - Science:
+  - Science with MLAP:
       - Overview: science/overview.md
       - Assessments:
           - Data Sampling: science/data-sampling.md
