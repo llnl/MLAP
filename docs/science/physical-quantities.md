@@ -138,9 +138,21 @@ The recommended full feature set is
 `HGT, UMag10, T2, RH, PREC, SW`, which is what the highest-scoring configuration
 in every study on this page uses.
 
-## Not yet assessed
+## Potential future studies
 
-**Terrain ruggedness** appears in the manuscript outline as a candidate feature
-but has no simulation results. Given that elevation alone contributes a small,
-stable gain, a ruggedness measure derived from the elevation field is a
-reasonable next test.
+**Terrain ruggedness** is the natural next candidate. Elevation on its own
+contributes a gain of about +0.007 that held to within 0.0002 across all four
+datasets — small, but consistent enough to indicate the terrain carries real
+signal. A ruggedness measure derived from the same elevation field would test
+whether local slope and variability add anything beyond height alone, at a cost
+of one further feature.
+
+It needs no change to data extraction, since elevation is already read. The work
+is a derived-feature computation in
+[Step 2](../user-guide/step2-prepare.md#derived-features), alongside the existing
+VPD calculation.
+
+A second question the results above raise: `PREC` contributes little on average,
+but California precipitation is concentrated in the winter months. Its marginal
+contribution may be much larger in a winter-only dataset than the year-round
+figure of 0.007 suggests — which would be tested by the seasonal-subset study.
