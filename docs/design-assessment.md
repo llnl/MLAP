@@ -33,7 +33,7 @@ specific problem, and the review is direct evidence that they solve it.
 | **Study interpretability** | Step 4 assembles many runs into a collection matrix of heatmaps and bar plots | Strong | Nothing for correctness. Plot cosmetics — legends inside axes, auto-scaled y-axes — occasionally need manual fixing before publication |
 | **Output completeness** | Step 3 records all 7 regression metrics on all 4 evaluation sets for every trained model, unconditionally | Strong | Nothing. This is what allowed a diagnosis nobody designed for |
 | **Configuration as data** | Every stage driven by JSON, so configuration is archivable alongside results | Strong | Nothing |
-| **Experiment bookkeeping** | `WildfireDataDefn.xlsx` registers every dataset, label and training configuration, and is distributed with the results archive | Strong | Nothing — a recipient of the archive can reconstruct study membership without contacting the author |
+| **Experiment bookkeeping** | [`WildfireDataDefn.xlsx`](science/overview.md#results-archive) registers every dataset, label and training configuration, and is distributed with the results archive | Strong | Nothing — a recipient of the archive can reconstruct study membership without contacting the author |
 | **Staged execution control** | Three `action` modes submit one stage at a time, so extraction can be verified before preparation, and preparation before training | Strong | Nothing — this is a deliberate safety gate, not a missing feature |
 | **Dataset metadata** | `data_defn.csv` records the parameters defining every dataset in a collection | Good | Counting conventions did not follow the data as it grew: `num_qois` and `cols_feature` do not say whether elevation or wind components are included |
 | **Code-version provenance** | Not recorded | **Absent** | **Stamp a commit hash and schema version** into the dataset metadata. This is the largest single gap |
@@ -49,9 +49,10 @@ alongside the inputs and outputs.
 
 ## The test
 
-The reviewer was given the repository and the results archive — roughly 8,600
-output files — with no access to the machine that produced them, no notebook of
-record, and no explanation of the naming conventions.
+The reviewer was given the repository and the
+[results archive](science/overview.md#results-archive) — roughly 8,600 output
+files — with no access to the machine that produced them, no notebook of record,
+and no explanation of the naming conventions.
 
 | Artifact | Count |
 |---|---|
@@ -161,8 +162,9 @@ limit of this stage.
 
 Each row below is one training configuration — one `json_train_model_NNN.json`
 file. A green cell means the feature was included. This reproduces the colour
-coding used in the experiment registry spreadsheet, which is where the selection
-is actually made.
+coding used in `WildfireDataDefn.xlsx`, the experiment registry, which is where
+the selection is actually made and which ships in the
+[results archive](science/overview.md#results-archive).
 
 <table class="feature-matrix" markdown="0">
 <thead><tr>

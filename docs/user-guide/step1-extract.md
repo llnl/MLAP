@@ -101,8 +101,9 @@ everything available in the dataset:
 ## Example dataset definitions
 
 The parameters above combine to define a dataset. These examples are drawn from
-the dataset registry in the results archive, and show how the settings translate
-into data volume and feature count.
+the dataset registry published in the
+[results archive](../science/overview.md#results-archive), and show how the
+settings translate into data volume and feature count.
 
 | Dataset | \(t_{max\_history}\) (h) | \(t_{history}\) (h) | History times | Reference times | Grid points per time | Rows extracted | QoIs | Features |
 |---|---|---|---|---|---|---|---|---|

@@ -19,6 +19,18 @@ at the development mirror, which is built from the same sources:
 - [Scientific Assessment](https://pkjha-aero.github.io/Wildfire_ML/science/overview/) — what the simulations show
 - [Design Assessment](https://pkjha-aero.github.io/Wildfire_ML/design-assessment/) — independent review of the automation architecture
 
+# Results archive
+
+The simulation output behind the documentation — 27 evaluation collections, 757
+metric CSVs, the Step 1 input configurations, and `WildfireDataDefn.xlsx`, the
+experiment registry recording which features every run used:
+
+**https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV**
+
+See [Results archive](https://pkjha-aero.github.io/Wildfire_ML/science/overview/#results-archive)
+for its layout and how to trace any documented number back to the run that
+produced it.
+
 The pipeline has five stages, each driven by a JSON input file:
 
 | Step | Purpose |

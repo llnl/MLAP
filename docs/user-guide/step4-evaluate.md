@@ -134,4 +134,6 @@ Per collection, under `eval_model_base_loc`:
   the collection
 
 The CSVs are the authoritative record; every result in the
-[Science with MLAP](../science/overview.md) section is drawn from them.
+[Science with MLAP](../science/overview.md) section is drawn from them. The
+collections behind this documentation are published in the
+[results archive](../science/overview.md#results-archive).
