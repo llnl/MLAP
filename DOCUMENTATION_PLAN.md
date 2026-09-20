@@ -1,238 +1,169 @@
 # MLAP Documentation Plan
 
-Working plan for building user and scientific documentation for the Machine
-Learning Automation Pipeline (MLAP). Branch: `documentation` (off `development`).
+Working plan for the MLAP documentation. Rewritten 2026-09-20 to record what is
+built and to set out what remains.
 
-## 1. Goal
+## 1. Status
 
-Two bodies of documentation, published as one searchable site:
+The documentation site is **built and live**. Seventeen pages covering a user
+guide, a scientific assessment, a design assessment and a contributing guide.
 
-1. **User guide** — how to run the pipeline: the five steps, the HPC submission
-   workflow, and a complete reference for the JSON files that drive everything.
-2. **Scientific description** — what the simulations show: the effect of data
-   sampling, history parameters, ML hyperparameters, and physical quantities on
-   fuel moisture (FM) prediction accuracy.
-
-## 2. Decisions made
-
-| Decision | Choice |
+| | |
 |---|---|
-| Toolchain | MkDocs + Material theme |
-| Hosting | GitHub Pages on `LLNL/MLAP` → `llnl.github.io/MLAP` |
-| Source format | Plain Markdown in `docs/` |
-| Build | GitHub Action publishing to `gh-pages` |
-| Figures | Committed to `docs/assets/` (2.4 MB total) |
-| Phase 4 scope | Write the manuscript's "To Do" sections **where simulation results exist** |
-| Plot interpretation | Show the plot and ask before asserting a conclusion |
+| Toolchain | MkDocs + Material theme, plain Markdown in `docs/` |
+| Build | `.github/workflows/docs.yml`, `mkdocs build --strict` with link validation |
+| Canonical URL | `https://software.llnl.gov/MLAP/` — **not yet live** |
+| Live now | `https://pkjha-aero.github.io/Wildfire_ML/` |
+| Merged so far | PRs #14, #15, #18, #19, #20, #21, #22, #23, #24 |
 
-### Why MkDocs rather than Sphinx/ReadTheDocs
+`llnl.github.io/MLAP` redirects to `software.llnl.gov/MLAP` — LLNL serves its
+GitHub Pages under a custom domain. Enabling Pages on `LLNL/MLAP` needs
+organisation-level access, which the author does not have; the fork publishes in
+the meantime.
 
-- Source stays plain Markdown, so it still renders on github.com if the build
-  ever breaks.
-- Search matters here: the Step 1 config alone exposes ~40 JSON keys.
-- Sphinx's main advantage is `autodoc`, which is worthless in this repo —
-  **docstring coverage is 0% across all 77 functions and classes**.
-- GitHub Pages keeps hosting inside the LLNL org with no third-party account.
+## 2. Completed
+
+- **Scaffold and deployment** — MkDocs, Material, MathJax, GitHub Action, Pages
+- **User guide** — installation, one page per pipeline step, HPC submission
+- **JSON reference** — every parameter across all five steps and the driver
+- **Scientific assessment** — data sampling, historical data, Random Forest
+  parameters, physical quantities, and the MLP study on its own page
+- **Design assessment** — independent review of the automation architecture
+- **Figures** — 37 assets: 23 from the manuscripts, 14 from the simulation output
+- **Presentation** — three-level nested sidebar, integrated page TOC, ReadTheDocs
+  code-block styling
 
 ## 3. Source material
 
-All source material lives in `ForClaude/` at the repo root. It is **gitignored**
-(594 MB) and must never be committed.
-
-### Manuscripts
-
-| File | Role | State |
-|---|---|---|
-| `EMS_Paper_2024_10_23_PKJ_Only.docx` | Software / methods paper | **Complete.** 9 parameter tables, 18 figures, appendices A.1–A.5 with full sample JSON |
-| `AI4ES_Paper_WIP_2026_09_18.docx` | Science / results paper | **Work in progress.** 28 figures; roughly half the results sections are empty stubs |
-
-The EMS paper is effectively a ready-made user manual. The AI4ES paper is the
-science source but is incomplete.
-
-### Simulation output — `ForClaude/Wildfire_Scratch/`
+Local reference material lives in `ForClaude/` at the repo root. It is
+**gitignored** and must never be committed.
 
 | Path | Contents |
 |---|---|
-| `InputJson/Extract/` | 20 sample Step 1 configs (`json_extract_data_039..058.json`) |
-| `Output/Step2_PrepData/` | 260 files — label distributions |
-| `Output/Step3_Train/` | 6,045 files — per-model scatter plots and eval CSVs |
-| `Output/Step4_Eval/` | 2,217 files across 27 `eval_*` directories, including **757 metric CSVs** |
-| `Output/Step5_Analyze/` | 22 files — FM maps for California and subregions |
-| `Trends/` | 28 FM trend plots, 2015–2099 (provenance unclear — see open questions) |
+| `EMS_Paper_2024_10_23_PKJ_Only.docx` | Software paper — complete. 9 tables, 18 figures, appendices A.1–A.5 |
+| `AI4ES_Paper_WIP_2026_09_18.docx` | Science paper — work in progress, 28 figures |
+| `Wildfire_Results/` | Simulation output, formerly `Wildfire_Scratch` |
 
-The `eval_*` directory names map almost 1:1 onto AI4ES section headings, and the
-CSVs contain the numbers for studies the manuscript has not yet written up.
+Published results archive:
+<https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV>
 
-### Source code
+## 4. Provenance approach
 
-`MachineLearningAutomationPipleline/` — 11 Python files, 6,341 LOC:
+Results in the documentation must be traceable to the runs that produced them.
 
-- `Step1_ExtractData/`, `Step2_PrepareData/`, `Step3_TrainModel/`,
-  `Step4_EvalModels/`, `Step5_Analyze/`, `SimulationScripts/`
-- 10 JSON config files, one per step (five for Step 3, one per model)
-- The `.py` files are `jupyter nbconvert` exports of the `.ipynb` notebooks;
-  notebooks are canonical, sbatch runs the generated `.py`
+**The identifier is the primary mechanism, not the link.** Every study cites its
+evaluation collection — `eval_015_RF_estimator_effect` — and every dataset cites
+its `data_set_count`. These are location-independent: they identify a run whether
+the archive sits on Google Drive, a DOI, or an LLNL filesystem.
 
-## 4. Target structure
+**The archive location is stated once.** A single pointer on the Science overview
+page says where the results live. If the location changes, one line changes
+rather than twenty.
 
-```
-docs/
-  index.md                     Overview, schematics, citation, LLNL release info
-  user-guide/
-    installation.md
-    step1-extract.md
-    step2-prepare.md
-    step3-train.md
-    step4-evaluate.md
-    step5-analyze.md
-    running-on-hpc.md          sbatch scripts + submit_multiple_runs.py
-    json-reference.md          All parameters, one searchable page
-  science/
-    overview.md                Approach, data source, methods
-    data-sampling.md           Temporal and spatial data size
-    history.md                 max_history_to_consider, history_interval
-    ml-parameters.md           Random Forest and MLP hyperparameters
-    physical-quantities.md     Elevation, PRECIP, SWDOWN, RH/T2/VPD
-  assets/                      46 figures extracted from the manuscripts
-mkdocs.yml
-requirements-docs.txt
-.github/workflows/docs.yml
-```
+### Recommendation: move to a DOI when convenient
 
-## 5. Phases
+Google Drive is fine as an interim but is weak for published science:
 
-### Phase 0 — Scaffold and prove deployment
+- Folder links break when permissions, ownership or folder structure change
+- No version history, so "the results as of the paper" cannot be pinned
+- Not citable — a reviewer cannot cite a Drive URL
+- Not archival — it disappears if the account does
 
-Build `mkdocs.yml`, `requirements-docs.txt`, a stub `docs/index.md`, and the
-GitHub Action. Get one real page live before writing any prose, so deployment
-problems surface immediately rather than at the end.
+**Zenodo** would be the better home: a permanent DOI, versioned, citable in the
+AI4ES paper, and free for records up to 50 GB. The 582 MB archive fits
+comfortably. Uploading the `Output/Step4_Eval` tree alone — 757 metric CSVs plus
+plots — would cover everything the documentation cites.
 
-**Risk to resolve first:** whether GitHub Pages can be enabled on `LLNL/MLAP`.
-Merge rights on the repo do not guarantee Pages permission at the org level. If
-Pages is blocked, fall back to Markdown rendering on github.com — the source
-format is identical, so no work is lost.
+Until then, the Drive link serves, and the identifiers mean nothing breaks when
+it is replaced.
 
-**Done when:** `llnl.github.io/MLAP` serves a page built by CI.
+## 5. Outstanding work
 
-### Phase 1 — Extract and name figures
+From the coverage audit of 2026-09-20. The two manuscripts are fully accounted
+for; these gaps are in the source code and simulation output.
 
-Extract 46 PNGs from `word/media/` in both `.docx` files into `docs/assets/`,
-renamed descriptively (`fig-mlap-stages.png`, not `image4.png`). Captions are
-already recoverable from the manuscript text; produce a manifest mapping each
-figure to its caption and destination page.
+| # | Gap | Status |
+|---|---|---|
+| 1 | Only 5 of 27 evaluation collections are named in the docs | **To do** |
+| 2 | `Trends/` — 28 plots, 2015–2099, entirely undocumented | **Deferred** |
+| 3 | Four of five per-model config files unmentioned | **To do** |
+| 4 | SVM and MLP hyperparameters not documented | **To do** |
+| 5 | Three `_Helper.py` modules never mentioned | **To do** |
+| 6 | `Step2_PrepData` and `Step5_Analyze` outputs unused | **Excluded** |
 
-**Done when:** every figure is named, placed, and attributed to a source paper.
+### 1. Collection provenance
 
-### Phase 2 — User guide (from the EMS paper)
+Roughly twenty studies have their results documented but no link back to the
+collection that produced them. This undercuts the traceability the design
+assessment praises. Each science section should name its source collection, and
+the Science overview should carry the archive pointer.
 
-Highest-value work: the source is complete and this is what an external user
-needs. One page per pipeline step following the paper's structure, pairing its
-prose with the actual config file in the repo.
+### 3. Per-model configuration files
 
-Also covers the `.ipynb → nbconvert → .py → sbatch` developer workflow and its
-staleness risk.
+The repository ships `json_train_model_{GB,Linear,MLP,RF,SVM}.json`. Only the
+Random Forest one appears in the documentation.
 
-**Done when:** a new user can run all five steps from the docs alone.
+### 4. Model hyperparameters
 
-### Phase 3 — JSON parameter reference
+The JSON reference describes `params` as passed through to the scikit-learn
+constructor without documenting what belongs there. The MLP set appears only in
+the science pages; the SVM set appears nowhere.
 
-The single searchable page that justifies the toolchain. Built by reading the
-**code**, then cross-checked against the paper's Tables 1, 4, 5, 6 and 7.
+### 5. Helper modules
 
-This ordering is deliberate — paper and code have already drifted (section 6).
-Every discrepancy gets reported rather than silently resolved.
+`Extract_DFM_Data_Helper.py` (1,434 lines — the largest file in the repository),
+`Prepare_TrainTest_Data_Helper.py` and `Analyze_Helper.py` are never mentioned.
+A reader navigating the source will not know the logic lives there.
 
-**Done when:** every JSON key the code reads is documented, and every drift is
-either fixed or logged.
+### 2. Trends — deferred
 
-### Phase 4 — Science section
+Twenty-eight plots spanning 2015–2020, 2029–2034, 2044–2049 and 2094–2099. Those
+decades indicate future climate projections, likely E3SM regionally refined model
+output. Neither manuscript covers this work. **Needs the author's input on what
+it is and whether it belongs in the documentation.**
 
-Two tiers, clearly distinguished in the text.
+### 6. Unused simulation output — excluded
 
-**Tier 1 — sections the manuscript completes.** Written from the paper, with the
-R² error (section 6) corrected:
+`Output/Step2_PrepData` (260 label distributions) and `Output/Step5_Analyze`
+(21 fuel maps) are not used; the documentation uses the manuscript's versions of
+these figures instead. Excluded by decision, not oversight.
 
-| Section | Source |
-|---|---|
-| Effect of temporal data size | `eval_002_temporal_data_effect` |
-| Effect of spatial data size | `eval_003_spatial_data_effect` |
-| Effect of maximum history | `eval_011_max_hist_effect` |
-| Effect of history interval | `eval_026_temp_resol` |
-| Effect of elevation | `eval_004_elevation_effect` |
+## 6. Defects carried forward
 
-**Tier 2 — sections marked "To Do" that have results.** Written from the CSVs
-and flagged in the text as derived from simulation output not yet in the
-manuscript:
+1. **Manuscript error — confirmed by the author.** The AI4ES paper states that R²
+   rises with temporal sample size. Every metric shows the opposite: test R² falls
+   0.8216 → 0.8001 and RMSE rises 0.0288 → 0.0301 as sampled reference times go
+   2,000 → 4,999. The documentation states the correct direction. **The
+   manuscript still needs the same fix.**
 
-| Section | Source |
-|---|---|
-| RF: data scaling | `eval_014_RF_scaling_effect` |
-| RF: estimators | `eval_015_RF_estimator_effect` |
-| RF: max_features | `eval_016_RF_max_features_effect` |
-| RF: bootstrap | `eval_017_RF_bootstrap_effect` |
-| MLP: hidden layers, activation, solver, alpha, learning rate, lr init, max_iter, shuffle | `eval_018` … `eval_025` |
-| Dropping PRECIP and SWDOWN | `eval_005_precip_flux_effect` |
-| RH / T2 / VPD substitution | `eval_006`, `eval_007`, `eval_008`, `eval_009`, `eval_010`, `eval_012` |
+2. **MLP training appears to stop prematurely.** `tol` is 1e-3 while the converged
+   training MSE is 0.0014, so the stopping threshold is roughly 70% of the entire
+   final loss. Train and test R² are within 0.0025 of each other, which is
+   underfitting rather than overfitting. All eight MLP studies ran under this
+   criterion and are marked provisional. A rerun with `tol` at 1e-6 is the single
+   highest-value follow-up.
 
-**Tier 3 — cannot be written.** These sections are marked "To Do" in the
-manuscript and have **no corresponding results** in `Wildfire_Scratch`. They
-stay out of the docs until the simulations are run:
+3. **`features_to_read` → `qois_to_read` rename is incomplete.** The code and
+   in-repo configs are correct. Remaining: EMS Appendix A.1 still shows the old
+   key; 14 local variable names in `Extract_DFM_Data_Helper.py` and
+   `Analyze.py:462` still use it; and all archived Step 1 configs use the old key
+   and **will not run** against current code.
 
-- Effect of terrain ruggedness as a feature
-- Effect of selecting data for specific months
-- Effect of selecting data from a specific region
-- Cross-application of trained models in time
-- Cross-application of trained models in space
+4. **EMS Table 6 omits a scaler.** It states four options and lists three; the
+   code supports `Standard` as well, which is what the Random Forest
+   configuration uses.
 
-**Done when:** Tiers 1 and 2 are written with numbers and plots; Tier 3 is
-listed as future work.
+5. **Notebook / script staleness.** Some `.py` files are older than the
+   `.ipynb` they are generated from, and the batch scripts run the `.py`.
 
-### Phase 5 — Integration
+6. **No docstrings.** 0 of 77 functions and classes. Forecloses API autodoc.
 
-README points at the site; cross-links between user guide and science sections;
-navigation and search verified.
-
-## 6. Known issues to resolve while writing
-
-1. **Manuscript error — confirmed.** AI4ES states "as the number of sampled data
-   files increases, the R2 increases." The data shows the opposite: in
-   `eval_002_temporal_data_effect`, as sampled reference times go
-   2,000 → 3,000 → 3,999 → 4,999, test R² falls 0.8216 → 0.8001 and RMSE rises
-   0.0288 → 0.0301, consistently across train, test, and best-95% metrics. The
-   docs will state the correct direction. **The manuscript needs the same fix.**
-
-2. **`features_to_read` → `qois_to_read` rename is incomplete.** The JSON key
-   was deliberately renamed to `qois_to_read`. The code and the in-repo configs
-   are correct and need no change; three trailing references remain:
-
-   - **EMS Appendix A.1 still shows `features_to_read`** — a manuscript fix, not
-     a code fix. The paper is internally inconsistent, since its Table 1 already
-     uses `qois_to_read`. Docs will document `qois_to_read`.
-   - **Internal variable and parameter names still say `features_to_read`** —
-     14 occurrences in `Extract_DFM_Data_Helper.py`, plus
-     `Analyze.py:462` (`features_to_read = features_labels['qois_to_read']`).
-     These are local names, not JSON keys, so nothing is broken; it is a
-     cosmetic inconsistency. Left alone unless you want it cleaned up.
-   - **All 20 archived configs in `Wildfire_Scratch/InputJson/Extract/` use the
-     old key** and none use the new one. They record how the published results
-     were produced but **will not run against the current code**. They must not
-     be reused as example configs in the docs without updating the key.
-
-3. **Paper omits a scaler option.** EMS Table 6 lists `MinMax`, `MaxAbs` and
-   `Robust` while stating that four scalers are available. The code supports a
-   fourth, `Standard`, which is what the repository's Random Forest
-   configuration actually uses. Docs document all four.
-
-4. **Notebook / script staleness.** `Extract_DFM_Data.ipynb` is newer than its
-   generated `Extract_DFM_Data.py`, which is what sbatch actually runs.
-
-5. **No docstrings.** 0 of 77 functions and classes are documented. Out of scope
-   for this plan, but it forecloses API autodoc and is worth a follow-up.
+Items 3–6 and the wider engineering gaps are covered in `IMPROVEMENT_SCOPE.md`
+(gitignored).
 
 ## 7. Open questions
 
-- **GitHub Pages permission** on `LLNL/MLAP` — blocks Phase 0 if denied.
-- **`Trends/` provenance.** 28 plots spanning 2015–2099 suggest future climate
-  projections, but neither manuscript covers this. Include, or leave out?
-- **Plot interpretation.** Where a conclusion depends on reading a figure rather
-  than a CSV, the plot gets shown for a decision before anything is asserted.
+- **GitHub Pages on `LLNL/MLAP`** — needs an organisation owner. Until then the
+  canonical URL stays dark.
+- **`Trends/` provenance** — what is this work, and does it belong here?
+- **Zenodo DOI** — worth doing before the AI4ES paper cites these results.
