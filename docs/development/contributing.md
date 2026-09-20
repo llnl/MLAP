@@ -9,6 +9,30 @@ docs/                                 This documentation
 mkdocs.yml                            Documentation configuration
 ```
 
+## Where the logic lives
+
+Each step is a thin driver plus a helper module. **The driver reads the JSON,
+calls helpers in order, and writes output; the helpers hold the actual work.**
+If you are looking for an algorithm, it is almost certainly in a helper.
+
+| Helper | Lines | Functions | Responsibilities |
+|---|---|---|---|
+| `Step1_ExtractData/Extract_DFM_Data_Helper.py` | 1,434 | 30 | Sampling times and grid points, reading NetCDF, assembling history, building the DataFrame |
+| `Step3_TrainModel/TrainModel_Helper.py` | 672 | 21 | Scaler and model construction, fitting, metrics, scatter and confusion plots |
+| `Step2_PrepareData/Prepare_TrainTest_Data_Helper.py` | 345 | 15 | Pruning, derived features, binary and multi-class label construction |
+| `Step5_Analyze/Analyze_Helper.py` | 180 | 8 | Timestamp parsing, region handling, reading HRRR and RRM sources |
+
+`Extract_DFM_Data_Helper.py` is the largest file in the repository and carries
+the sampling logic — `downsample_data_files`, `remove_data_around_fire`,
+`get_fire_time_indices` — that determines what any dataset actually contains.
+
+`Step4_EvalModels` has no helper; `EvaluateTrainedModels.py` is self-contained.
+
+!!! note
+    None of these modules have docstrings, so the function names are the only
+    guide. Adding one while you are in a function is welcome — see
+    [Docstrings](#docstrings).
+
 ## Working with the notebooks
 
 Each pipeline step exists as a notebook and a generated script. **The notebook is
