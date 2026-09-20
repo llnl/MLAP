@@ -12,6 +12,13 @@ while holding the data fixed is exactly what
 [`qois_for_training`](../user-guide/step3-train.md#choosing-features-for-training)
 is for.
 
+!!! note "Figures on this page"
+    The elevation study compares two feature sets and is shown as a bar chart.
+    The other two compare six and eight, which is too many to read as grouped
+    bars, so they are shown as heatmaps with the values printed in each cell.
+    Brighter is better in the heatmaps; the colour scale is shared within a
+    figure but not between them.
+
 ## Effect of elevation
 
 Elevation (`HGT`) is the only feature that does not vary with time. Each dataset
@@ -52,6 +59,13 @@ individually and together, from a base set of `HGT, UMag10, T2, RH`.
 | `HGT, UMag10, T2, RH, SW` (no `PREC`) | 0.8459 | 0.8695 | 0.8828 | 0.8933 |
 | `HGT, UMag10, T2, RH, PREC` (no `SW`) | 0.8236 | 0.8412 | 0.8540 | 0.8630 |
 | `HGT, UMag10, T2, RH` (neither) | 0.8094 | 0.8291 | 0.8399 | 0.8494 |
+
+![Effect of dropping precipitation and shortwave flux](../assets/fig-sci-precip-flux.png)
+
+/// caption
+R² on the best 95% of test data for all eight feature combinations across the
+four datasets. The four darker columns are those without `SW`.
+///
 
 On dataset 42, relative to the full set:
 
@@ -95,6 +109,14 @@ baseline history settings. Six combinations were tested against a base set of
 | `RH` alone | 0.8384 | 0.8601 | 0.8751 | 0.8843 |
 | `VPD` alone | 0.8364 | 0.8592 | 0.8740 | 0.8842 |
 | `T2` alone | 0.8265 | 0.8540 | 0.8726 | 0.8840 |
+
+![Temperature, humidity and VPD combinations](../assets/fig-sci-temp-rh-vpd.png)
+
+/// caption
+R² on the best 95% of test data for six combinations of `T2`, `RH` and `VPD`,
+each added to a base set of `HGT, UMag10, PREC, SW`. The leftmost column is the
+`T2, RH` baseline, brightest on every row.
+///
 
 Three findings, all consistent across the four datasets:
 
