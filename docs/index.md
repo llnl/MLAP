@@ -12,6 +12,15 @@ planning and protection decisions for wildlands, populations, and infrastructure
 Every stage is driven by a JSON input file, so large parametric studies can be
 run and interpreted without hand-editing code.
 
+!!! info "Built for wildfire, designed more generally"
+    The quantities throughout this documentation are wildfire's, but the
+    structure is not specific to it: MLAP relates a target variable to the
+    history of driving variables preceding it on a spatiotemporal grid. Other
+    atmospheric-science problems of that shape can use the same machinery with
+    different variables — see
+    [Applicability beyond wildfire](design-assessment.md#applicability-beyond-wildfire)
+    for what transfers unchanged and what would need code.
+
 ## The pipeline
 
 ![Stages in the machine learning automation pipeline](assets/fig-mlap-stages.png)
@@ -96,12 +105,12 @@ parameters, ML hyperparameters, and the choice of physical quantities.
 
 ## Design assessment
 
-!!! success "Independently reviewed — 8/10 for automation design"
+!!! success "Independently reviewed — 9.5/10 for automation design"
 
     MLAP's naming conventions exist to keep large parametric studies
     interpretable long after they are run. An independent review tested that
-    claim directly: given **594 MB of accumulated output** and no access to the
-    machine that produced it, could every number be traced back to the
+    claim directly: given the source code and the results archive, and no access
+    to the machine that produced them, could every number be traced back to the
     configuration that generated it?
 
     - **~8,600 output files** across 27 evaluation collections — every artifact
@@ -109,9 +118,14 @@ parameters, ML hyperparameters, and the choice of physical quantities.
     - **Two independently assembled collections cross-validated** — dataset 41
       reports an identical R² of 0.8906 in both, agreement that was not designed
       in
+    - **The output answered a question it was never designed for** — diagnosing
+      the MLP shortfall needed metrics no study had been set up to produce, and
+      all of them were already there
     - **Fourteen parameter studies** existing only as output, never written up,
-      were recovered in full — including the largest hyperparameter effect in the
-      assessment
+      were recovered in full
+
+    The review scores each criterion and states what would close the remaining
+    gap.
 
     [Read the full assessment](design-assessment.md){ .md-button .md-button--primary }
 

@@ -23,35 +23,63 @@ scatter between datasets, that is said explicitly.
 
 ## Results archive
 
+Everything on these pages derives from a single archive of simulation output,
+published alongside the code.
+
+**[Open the results archive](https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV)**
+
+### What it contains
+
+| Path | Contents |
+|---|---|
+| `WildfireDataDefn.xlsx` | **Experiment registry** — tabs for datasets, labels and training configurations, recording which features every run used. Determines collection membership |
+| `InputJson/Extract/` | Step 1 configurations for the archived datasets |
+| `Output/Step2_PrepData/` | Label distributions from data preparation |
+| `Output/Step3_Train/` | Per-model scatter plots and the full metric CSV for every trained model |
+| `Output/Step4_Eval/` | 27 evaluation collections — heatmaps, bar plots and **757 metric CSVs**. Every number on these pages comes from here |
+| `Output/Step5_Analyze/` | Fuel maps for California and sub-regions |
+| `Trends/` | Fuel moisture trend plots, 2015–2099 |
+
+### How to find the run behind a number
+
 Every study on these pages names the **evaluation collection** it came from —
 `eval_015_RF_estimator_effect`, for example. That identifier is the link between
 a number in the documentation and the run that produced it: it appears in the
 collection's directory name, in every plot and CSV filename inside it, and in
 the [Step 4](../user-guide/step4-evaluate.md) configuration that generated it.
 
-Each collection also records the datasets it used in
-`<collection>_data_defn.csv`, and each dataset is identified by its
-`data_set_count` from [Step 1](../user-guide/step1-extract.md).
+1. Find the *Source* line under a study heading — that names the collection
+2. Open `Output/Step4_Eval/<collection>/` in the archive
+3. `<collection>_metrics_<metric>_<set>.csv` holds the numbers quoted here
+4. `<collection>_data_defn.csv` describes the datasets that collection used
+5. `WildfireDataDefn.xlsx` records which features each training configuration
+   included — see
+   [How a collection is assembled](../design-assessment.md#how-a-collection-is-assembled)
 
-The simulation output backing these pages is archived at:
-
-<https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV>
+Each dataset is identified by its `data_set_count` from
+[Step 1](../user-guide/step1-extract.md), and its extraction configuration is in
+`InputJson/Extract/json_extract_data_<NNN>.json`.
 
 !!! note
     The identifiers, not the link, are what make a result traceable. They are
     location-independent, so the archive can move without invalidating anything
     written here.
 
+!!! warning "Archived configurations use an older key"
+    The Step 1 configurations in `InputJson/Extract/` predate the rename of
+    `features_to_read` to `qois_to_read`, so they will not run unmodified
+    against current code. They remain accurate as a record of what was run.
+
 The archive holds 27 collections. Twenty-four are cited across these pages. The
 remaining three — `eval_000_test`, `eval_001_many_cases` and
 `eval_013_many_cases` — are exploratory runs spanning many datasets and models
 at once, superseded by the focused collections above and not cited.
 
-!!! info "Two tiers of result"
-    Some sections correspond to written sections of the fuel moisture assessment
-    manuscript. Others report studies that were **run but not yet written up** —
-    the simulation output exists in full, and those sections are marked with a
-    note. Both are drawn from the same CSVs.
+!!! info "Basis for these results"
+    Everything here is derived from the results archive and the source code.
+    Draft papers covering this work are in progress and unpublished; nothing on
+    these pages depends on them, and no claim here should be read as a published
+    finding.
 
 ## Assessment performed
 

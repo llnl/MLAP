@@ -58,8 +58,17 @@ nothing verifies this for you.
 "metric_on_sets": ["train", "test", "test_p90", "test_p95"]
 ```
 
-Seven metrics across four datasets produces **28 combinations**, and each yields
-both a heatmap and a bar plot — **56 plots per collection**.
+Both are **lists you choose**. Each metric/dataset pair yields a heatmap, a bar
+plot and a CSV, so the output scales with what you ask for: the seven-by-four
+example above gives 28 pairs and **56 plots per collection**. Naming fewer of
+either shrinks that proportionally.
+
+!!! note "Selecting here does not discard anything"
+    [Step 3](step3-train.md#regression-metrics) has already recorded all seven
+    metrics on all four sets for every trained model. These lists control what a
+    collection *aggregates and plots*, not what was computed — so narrowing them
+    costs nothing permanently, and a metric left out today can still be
+    collected later without retraining.
 
 For classification problems, accuracy is the only metric; everything else is
 identical.
@@ -97,7 +106,7 @@ to find them. See [Running on HPC](running-on-hpc.md#directory-layout).
 
 These combine into the output directory name — `eval_001_many_cases`. Choosing a
 descriptive `identifier_text` is what makes a large study navigable months later;
-the published studies use names like `temporal_data_effect` and
+the archived collections use names like `temporal_data_effect` and
 `RF_estimator_effect`.
 
 ## Example outputs
@@ -125,4 +134,6 @@ Per collection, under `eval_model_base_loc`:
   the collection
 
 The CSVs are the authoritative record; every result in the
-[Science with MLAP](../science/overview.md) section is drawn from them.
+[Science with MLAP](../science/overview.md) section is drawn from them. The
+collections behind this documentation are published in the
+[results archive](../science/overview.md#results-archive).
