@@ -37,6 +37,12 @@ misconfigurations rather than tuning choices.
 
 ## Random Forest
 
+!!! warning "Reading the plots below"
+    The bar charts in this section are generated with an automatically scaled
+    y-axis that does **not** start at zero, so small differences look large. All
+    four span a range of roughly 0.03 in R². Read the tables for magnitude and
+    the plots for ordering and consistency across datasets.
+
 ### Effect of data scaling
 
 | Scaler | Dataset 79 | Dataset 80 | Dataset 81 |
@@ -45,6 +51,12 @@ misconfigurations rather than tuning choices.
 | `MinMax` | 0.8722 | 0.8852 | 0.8951 |
 | `MaxAbs` | 0.8724 | 0.8857 | 0.8953 |
 | `Robust` | 0.8724 | 0.8861 | 0.8954 |
+
+![Effect of data scaling on Random Forest](../assets/fig-sci-rf-scaling.png)
+
+/// caption
+R² on the best 95% of test data for four scalers across datasets 79, 80 and 81.
+///
 
 Scaling makes **no meaningful difference** — the spread is under 0.001 on every
 dataset, far below the difference between datasets.
@@ -64,6 +76,14 @@ ensembles it is close to a no-op.
 | 125 | 0.8722 | 0.8861 | 0.8957 |
 | 150 | 0.8729 | 0.8859 | 0.8960 |
 
+![Effect of the number of estimators on Random Forest](../assets/fig-sci-rf-estimators.png)
+
+/// caption
+R² on the best 95% of test data for 50 to 150 trees. Within each dataset the
+bars are almost indistinguishable; nearly all the visible variation is between
+datasets.
+///
+
 Accuracy rises slightly from 50 to 100 trees, then **plateaus completely**. Going
 from 100 to 150 changes R² by at most 0.0001 while costing 50% more training time.
 
@@ -77,6 +97,13 @@ tuning this upward.
 | `1.0` *(all features)* | 0.8724 | 0.8863 | 0.8960 |
 | `"sqrt"` | 0.8671 | 0.8802 | 0.8884 |
 | `"log2"` | 0.8663 | 0.8777 | 0.8867 |
+
+![Effect of max_features on Random Forest](../assets/fig-sci-rf-max-features.png)
+
+/// caption
+R² on the best 95% of test data for `1.0`, `sqrt` and `log2`. The ordering is
+the same on all three datasets.
+///
 
 Using **all** features at each split is consistently best, by about 0.008–0.009
 over `sqrt` and slightly more over `log2`. The ordering holds on all three
@@ -92,6 +119,13 @@ close to a percentage point.
 |---|---|---|---|
 | `True` *(default)* | 0.8724 | 0.8863 | 0.8960 |
 | `False` | 0.7546 | 0.7836 | 0.8037 |
+
+![Effect of bootstrap on Random Forest](../assets/fig-sci-rf-bootstrap.png)
+
+/// caption
+R² on the best 95% of test data with bootstrap sampling enabled and disabled.
+This is the only Random Forest setting whose effect is visible at a glance.
+///
 
 This is the **single largest hyperparameter effect in the entire assessment**.
 Disabling bootstrap costs 9–12 percentage points of R².
