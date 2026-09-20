@@ -33,6 +33,11 @@ Each collection also records the datasets it used in
 `<collection>_data_defn.csv`, and each dataset is identified by its
 `data_set_count` from [Step 1](../user-guide/step1-extract.md).
 
+The archive also contains `WildfireDataDefn.xlsx`, the experiment registry —
+tabs for datasets, labels and training configurations, recording which features
+each run used. It is what determines collection membership, and it ships with
+the results.
+
 The simulation output backing these pages is archived at:
 
 <https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV>

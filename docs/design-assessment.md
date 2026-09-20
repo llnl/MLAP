@@ -9,7 +9,7 @@ it is** — the nomenclature conventions described in
 [Running on HPC](user-guide/running-on-hpc.md#nomenclature) exist to solve a
 specific problem, and the review is direct evidence that they solve it.
 
-**Automation design: 9/10.**
+**Automation design: 9.5/10.**
 
 !!! note "Scope and basis"
     This assesses the **automation design** — how well the pipeline supports
@@ -33,15 +33,19 @@ specific problem, and the review is direct evidence that they solve it.
 | **Study interpretability** | Step 4 assembles many runs into a collection matrix of heatmaps and bar plots | Strong | Nothing for correctness. Plot cosmetics — legends inside axes, auto-scaled y-axes — occasionally need manual fixing before publication |
 | **Output completeness** | Step 3 records all 7 regression metrics on all 4 evaluation sets for every trained model, unconditionally | Strong | Nothing. This is what allowed a diagnosis nobody designed for |
 | **Configuration as data** | Every stage driven by JSON, so configuration is archivable alongside results | Strong | Nothing |
-| **Experiment bookkeeping** | `WildfireDataDefn.xlsx` registers every dataset, label and training configuration | Strong | **Ship it with the results.** It is authoritative but was not distributed with the archive, so a recipient cannot reconstruct study membership |
+| **Experiment bookkeeping** | `WildfireDataDefn.xlsx` registers every dataset, label and training configuration, and is distributed with the results archive | Strong | Nothing — a recipient of the archive can reconstruct study membership without contacting the author |
 | **Staged execution control** | Three `action` modes submit one stage at a time, so extraction can be verified before preparation, and preparation before training | Strong | Nothing — this is a deliberate safety gate, not a missing feature |
 | **Dataset metadata** | `data_defn.csv` records the parameters defining every dataset in a collection | Good | Counting conventions did not follow the data as it grew: `num_qois` and `cols_feature` do not say whether elevation or wind components are included |
 | **Code-version provenance** | Not recorded | **Absent** | **Stamp a commit hash and schema version** into the dataset metadata. This is the largest single gap |
 | **Input validation** | No check before submission | **Absent** | **Validate every config in a collection before any job is submitted**, so a typo fails in seconds rather than after hours of queue time |
 | **Failure detection** | Collection membership is curated by hand, so failed runs are simply never listed | Adequate | An automated sweep at the simulation location, reporting which expected outputs are missing |
 
-The three items in bold are what separate 9 from 10. All three are additive — none
+The two items in bold are what separate 9.5 from 10. Both are additive — neither
 requires changing the design.
+
+A third gap, that the experiment registry was not distributed with the results,
+was closed after this review: the registry now ships inside the archive
+alongside the inputs and outputs.
 
 ## The test
 
@@ -55,6 +59,11 @@ record, and no explanation of the naming conventions.
 | Step 4 evaluation outputs | 2,217 across 27 collections |
 | Step 4 metric CSVs | 757 |
 | Archived input configurations | 20 |
+
+The experiment registry was **not** available during this test. Everything below
+was reconstructed from filenames, configurations and CSVs alone, which is a
+harder starting point than a recipient of the archive faces today — the registry
+now ships with it.
 
 The question was whether the provenance design would allow **which configuration
 produced which number** to be reconstructed from the artifacts alone.
@@ -261,9 +270,7 @@ dataset metadata would close both.
 error hours into a long job — and if it is in a template used to generate
 hundreds of configurations, it is in all of them.
 
-**The experiment registry is not distributed with the results.** The bookkeeping
-that records what each collection contains is authoritative, but a recipient of
-the archive alone cannot reconstruct study membership from it.
+Both gaps are in the code rather than the packaging, and both are additive.
 
 ## Summary
 

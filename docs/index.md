@@ -96,7 +96,7 @@ parameters, ML hyperparameters, and the choice of physical quantities.
 
 ## Design assessment
 
-!!! success "Independently reviewed — 9/10 for automation design"
+!!! success "Independently reviewed — 9.5/10 for automation design"
 
     MLAP's naming conventions exist to keep large parametric studies
     interpretable long after they are run. An independent review tested that
