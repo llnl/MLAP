@@ -34,6 +34,8 @@ does not reproduce across all three is not a real effect.
 
 ## Effect of data scaling
 
+*Source: `eval_014_RF_scaling_effect`*
+
 | Scaler | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `Standard` | 0.8724 | 0.8863 | 0.8960 |
@@ -56,6 +58,8 @@ matters for distance- and gradient-based models such as SVM and MLP; for tree
 ensembles it is close to a no-op.
 
 ## Effect of the number of estimators
+
+*Source: `eval_015_RF_estimator_effect`*
 
 | `n_estimators` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
@@ -81,6 +85,8 @@ tuning this upward.
 
 ## Effect of `max_features`
 
+*Source: `eval_016_RF_max_features_effect`*
+
 | `max_features` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `1.0` *(all features)* | 0.8724 | 0.8863 | 0.8960 |
@@ -103,6 +109,8 @@ This is worth noting because `sqrt` is the scikit-learn default for
 close to a percentage point.
 
 ## Effect of `bootstrap`
+
+*Source: `eval_017_RF_bootstrap_effect`*
 
 | `bootstrap` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|

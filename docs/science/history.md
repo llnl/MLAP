@@ -11,6 +11,8 @@ Both drive feature count directly, so both trade accuracy against cost.
 
 ## Effect of maximum history
 
+*Source: `eval_011_max_hist_effect`*
+
 Five datasets were extracted with \(t_{history}\) fixed at 4 h and
 \(t_{max\_history}\) varied from 32 to 48 hours. Each has 3,000 reference times
 and 4,000 grid points — about 12 million rows.
@@ -42,6 +44,8 @@ Larger fuel categories equilibrate more slowly, so 100-hour and 1000-hour fuels
 would be expected to need longer windows. That has not been tested.
 
 ## Effect of history interval (temporal resolution)
+
+*Source: `eval_026_temp_resol`*
 
 Four datasets were extracted with \(t_{max\_history}\) fixed at 32 h and
 \(t_{history}\) varied. These use 1,000 reference times and 1,000 grid points —

@@ -10,6 +10,8 @@ behave quite differently.
 
 ## Effect of spatial data size
 
+*Source: `eval_003_spatial_data_effect`*
+
 Four datasets were extracted with the number of sampled reference times held at
 2,000 and the number of grid points per time varied from 1,000 to 4,000.
 Everything else — 32 h maximum history, 4 h history interval, the same five
@@ -39,6 +41,8 @@ valleys, coastline — is represented, which is what the model needs to generali
 across the domain.
 
 ## Effect of temporal data size
+
+*Source: `eval_002_temporal_data_effect`*
 
 Four datasets were extracted with grid points held at 3,000 and reference times
 varied from 2,000 to roughly 5,000.

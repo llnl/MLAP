@@ -76,6 +76,8 @@ the model.
 
 ## Effect of `solver`
 
+*Source: `eval_020_MLP_solver`*
+
 | `solver` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `adam` | 0.7758 | 0.7853 | 0.7918 |
@@ -108,6 +110,8 @@ datasets of this size.
 
 ## Effect of hidden layer sizes
 
+*Source: `eval_018_MLP_hidden_layers`*
+
 | `hidden_layer_sizes` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `[10, 10]` | 0.7838 | 0.7816 | 0.7849 |
@@ -136,6 +140,8 @@ alone looks unlikely.
 
 ## Effect of `activation`
 
+*Source: `eval_019_MLP_activation`*
+
 | `activation` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `relu` *(baseline)* | 0.7758 | 0.7853 | 0.7918 |
@@ -153,6 +159,8 @@ on neither — the ordering changes with the dataset. The spread is comparable t
 run-to-run noise, so this choice does not matter at this network size.
 
 ## Effect of `alpha`
+
+*Source: `eval_021_MLP_alpha`*
 
 | `alpha` (L2 penalty) | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
@@ -173,6 +181,8 @@ unsurprising given the network is not overfitting in the first place (see
 
 ## Effect of `learning_rate`
 
+*Source: `eval_022_MLP_lr`*
+
 | `learning_rate` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | `constant` *(baseline)* | 0.7758 | 0.7853 | 0.7918 |
@@ -190,6 +200,8 @@ consistent ordering. Note that `adam` adapts its own step sizes, so the
 `learning_rate` schedule has limited influence with this solver.
 
 ## Effect of `learning_rate_init`
+
+*Source: `eval_023_MLP_lr_init`*
 
 | `learning_rate_init` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
@@ -214,6 +226,8 @@ training that halts before convergence rather than one that overshoots.
 
 ## Effect of `max_iter`
 
+*Source: `eval_024_MLP_max_iter`*
+
 | `max_iter` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
 | 50 | 0.7877 | 0.7893 | 0.7900 |
@@ -235,6 +249,8 @@ tolerance long before the cap. See
 [below](#why-the-mlp-underperforms-random-forest).
 
 ## Effect of `shuffle`
+
+*Source: `eval_025_MLP_shuffle`*
 
 | `shuffle` | Dataset 79 | Dataset 80 | Dataset 81 |
 |---|---|---|---|
