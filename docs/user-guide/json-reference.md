@@ -61,9 +61,9 @@ Removes the Nevada portion of the domain, since the study focuses on California.
 | `SJSU_RRM_Maps` | object | Maps MLAP quantity names to E3SM RRM variable names |
 
 !!! warning "Renamed from `features_to_read`"
-    This key is `qois_to_read`. Appendix A.1 of the MLAP software paper shows the
-    older name `features_to_read`; the code has since been renamed and the paper
-    was not updated. The paper's Table 1 already uses the current name.
+    This key is `qois_to_read`. It was previously `features_to_read`, renamed
+    because the list holds quantities of interest — features are those
+    quantities multiplied by the number of history times.
 
     All archived example configurations under
     `Wildfire_Scratch/InputJson/Extract/` still use the old key and **will not

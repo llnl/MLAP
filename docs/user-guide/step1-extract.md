@@ -100,9 +100,9 @@ everything available in the dataset:
 
 ## Example dataset definitions
 
-The parameters above combine to define a dataset. These are the datasets
-extracted from the 21-year record for the studies in the MLAP software paper,
-showing how the settings translate into data volume and feature count.
+The parameters above combine to define a dataset. These examples are drawn from
+the dataset registry in the results archive, and show how the settings translate
+into data volume and feature count.
 
 | Dataset | \(t_{max\_history}\) (h) | \(t_{history}\) (h) | History times | Reference times | Grid points per time | Rows extracted | QoIs | Features |
 |---|---|---|---|---|---|---|---|---|

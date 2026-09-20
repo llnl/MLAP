@@ -172,8 +172,8 @@ obscure how the model performs on the bulk of the data.
 
 ## Regression metrics
 
-All seven are computed on all four datasets, giving 28 numbers per
-(dataset, label, model) combination:
+All seven are computed on all four datasets **unconditionally** — 28 numbers per
+(dataset, label, model) combination, with nothing to configure:
 
 | Metric | Definition |
 |---|---|

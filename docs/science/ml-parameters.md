@@ -9,10 +9,9 @@ page asks which of its own settings are worth tuning.
 
 The [Multi-layer Perceptron](mlp.md) is covered separately.
 
-!!! info "Results not yet in the manuscript"
-    Every study on this page was run and its output is complete, but these
-    sections are still placeholders in the fuel moisture assessment manuscript.
-    The numbers below come from the metric CSVs rather than from the paper.
+!!! info "Derived from the archive"
+    Every number on this page comes from the Step 4 metric CSVs. The collection
+    backing each study is named beneath its heading.
 
 All studies here use the same three datasets, which differ only in spatial sample
 size, with \(t_{max\_history} = 32\) h and \(t_{history} = 4\) h:

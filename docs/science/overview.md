@@ -47,11 +47,11 @@ remaining three — `eval_000_test`, `eval_001_many_cases` and
 `eval_013_many_cases` — are exploratory runs spanning many datasets and models
 at once, superseded by the focused collections above and not cited.
 
-!!! info "Two tiers of result"
-    Some sections correspond to written sections of the fuel moisture assessment
-    manuscript. Others report studies that were **run but not yet written up** —
-    the simulation output exists in full, and those sections are marked with a
-    note. Both are drawn from the same CSVs.
+!!! info "Basis for these results"
+    Everything here is derived from the results archive and the source code.
+    Draft papers covering this work are in progress and unpublished; nothing on
+    these pages depends on them, and no claim here should be read as a published
+    finding.
 
 ## Assessment performed
 

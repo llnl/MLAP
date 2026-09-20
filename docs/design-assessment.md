@@ -17,8 +17,8 @@ specific problem, and the review is direct evidence that they solve it.
     implementation quality, which is scored separately and is materially weaker.
 
     The evidence comes from the **source code and the results archive alone**.
-    The MLAP manuscripts are work in progress and not yet published, so nothing
-    here depends on them.
+    Draft papers covering the pipeline and the science exist but are work in
+    progress and unpublished, so nothing here depends on them.
 
 ## How this was scored
 
@@ -26,7 +26,7 @@ specific problem, and the review is direct evidence that they solve it.
 |---|---|---|---|
 | **Result traceability** | A run is identified by a (dataset, label, model) triple that appears in every filename it touches | Strong | Nothing — this is the load-bearing decision and it holds without exception |
 | **Study interpretability** | Step 4 assembles many runs into a collection matrix of heatmaps and bar plots | Strong | Nothing for correctness. Plot cosmetics — legends inside axes, auto-scaled y-axes — occasionally need manual fixing before publication |
-| **Output completeness** | All 7 metrics computed on all 4 evaluation sets by default, whether or not asked for | Strong | Nothing. This is what allowed a diagnosis nobody designed for |
+| **Output completeness** | Step 3 records all 7 regression metrics on all 4 evaluation sets for every trained model, unconditionally | Strong | Nothing. This is what allowed a diagnosis nobody designed for |
 | **Configuration as data** | Every stage driven by JSON, so configuration is archivable alongside results | Strong | Nothing |
 | **Experiment bookkeeping** | `WildfireDataDefn.xlsx` registers every dataset, label and training configuration | Strong | **Ship it with the results.** It is authoritative but was not distributed with the archive, so a recipient cannot reconstruct study membership |
 | **Staged execution control** | Three `action` modes submit one stage at a time, so extraction can be verified before preparation, and preparation before training | Strong | Nothing — this is a deliberate safety gate, not a missing feature |
@@ -92,9 +92,13 @@ Diagnosing why the MLP underperforms Random Forest required train-versus-test R�
 loss magnitude against the stopping tolerance, and confirmation across thirty-odd
 configurations. No study was set up to answer that.
 
-All of it was already there, because Step 4 computes every metric on every
-evaluation set by default. Had only test R² been stored — the obvious economy —
-the finding would have been unreachable without rerunning everything.
+All of it was already there. Step 3 records the full regression metric set —
+seven metrics on train, test, best-95% and best-90% — for every trained model,
+with no configuration involved. Had only test R² been stored, the obvious
+economy, the finding would have been unreachable without rerunning everything.
+
+Step 4 then lets a collection surface whichever subset of those is of interest,
+so the aggregation is selective while the underlying record stays complete.
 
 Designing output to answer questions that have not been asked yet is the hardest
 property to get right, and it is the single strongest thing in this architecture.
@@ -124,7 +128,9 @@ purpose. Across 27 collections the convention held without exception.
 **Dataset parameters recorded with metrics.** `data_defn.csv` sits beside the
 metric CSVs, so numbers arrive with the parameters that generated them.
 
-**Exhaustive metric computation.** Seven metrics on four evaluation sets, always.
+**Exhaustive metric capture at the run level.** Step 3 always records seven
+metrics on four evaluation sets. What a collection *reports* is selectable, but
+what is *kept* is not — so a question asked later can still be answered.
 
 **Staged execution with verification gates.** Extraction, preparation and
 training are submitted separately and deliberately. A flawed extraction cannot

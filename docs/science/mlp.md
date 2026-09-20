@@ -47,7 +47,7 @@ reproduce across all three is not a real effect.
 
 ## Baseline configuration
 
-The MLP was configured from the baseline in the software paper:
+The MLP baseline, taken from `json_train_model_MLP.json` in the repository:
 `hidden_layer_sizes` `[15, 15]`, `relu`, `adam`, `alpha` 1e-4, constant learning
 rate, `learning_rate_init` 0.001, `max_iter` 500, `shuffle` true, `tol` 1e-3.
 Each study varies one parameter from that baseline.
@@ -101,10 +101,10 @@ falls progressively further from convergence as rows are added. It is unsuited t
 datasets of this size.
 
 !!! note
-    The manuscript flags this section as needing re-investigation. The pattern
-    above is consistent with a convergence failure rather than a property of the
-    solver itself — a rerun with a much larger `max_iter`, or with convergence
-    warnings captured, would settle it.
+    This result warrants re-investigation. The pattern above is consistent with a
+    convergence failure rather than a property of the solver itself — a rerun
+    with a much larger `max_iter`, or with convergence warnings captured, would
+    settle it.
 
 **Use `adam`.**
 

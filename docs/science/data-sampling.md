@@ -57,14 +57,15 @@ varied from 2,000 to roughly 5,000.
 Accuracy **decreases monotonically** as more reference times are added, even
 though total row count rises from 6 to 15 million.
 
-!!! warning "This corrects the manuscript"
-    The fuel moisture assessment manuscript states that "as the number of sampled
-    data files increases, the R2 increases." The simulation output shows the
-    opposite, consistently across every metric: R² falls on train
-    (0.9748 → 0.9718), test (0.8216 → 0.8001) and test p95
-    (0.8906 → 0.8744), while RMSE rises (0.0288 → 0.0301).
+!!! warning "This contradicts the intuitive expectation"
+    More training data is normally assumed to improve accuracy, and it is easy
+    to state that without checking. The archive shows the opposite here,
+    consistently across every metric: R² falls on train (0.9748 → 0.9718), test
+    (0.8216 → 0.8001) and test p95 (0.8906 → 0.8744), while RMSE rises
+    (0.0288 → 0.0301).
 
-    **The manuscript text needs correcting**, not the documentation.
+    Any write-up of this study should carry the direction shown by the data, not
+    the expected one.
 
 ![Effect of temporal data size](../assets/fig-sci-temporal-data-size.png)
 
@@ -102,9 +103,8 @@ and then grid points for each time (`"sample_first": "time"`), or the reverse.
 The spatial-size study above used spatial-first sampling; the history studies
 used temporal-first.
 
-The manuscript raises the order of sampling as a question to assess. No
-collection isolates it — no pair of datasets differs *only* in `sample_first` —
-so its effect remains unquantified.
+No collection in the archive isolates this — no pair of datasets differs *only*
+in `sample_first` — so its effect remains unquantified.
 
 ## Practical guidance
 

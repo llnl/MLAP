@@ -50,9 +50,9 @@ At one feature out of 41, elevation is cheap. **Keep it.**
 
 *Source: `eval_005_precip_flux_effect`*
 
-!!! info "Results not yet in the manuscript"
-    This section is a placeholder in the manuscript; the numbers come from the
-    simulation output.
+!!! info "Derived from the archive"
+    The numbers in this section come from the Step 4 metric CSVs of the
+    collection named above.
 
 Precipitation (`PREC`) and downward shortwave flux (`SW`) were dropped
 individually and together, from a base set of `HGT, UMag10, T2, RH`.
@@ -100,9 +100,9 @@ individually as `eval_006_replace_temp_rh_by_vpd`, `eval_007_drop_rh`,
 `eval_008_drop_temp`, `eval_009_replace_temp_by_vpd` and
 `eval_010_replace_rh_by_vpd`*
 
-!!! info "Results not yet in the manuscript"
-    This section is a placeholder in the manuscript; the numbers come from the
-    simulation output.
+!!! info "Derived from the archive"
+    The numbers in this section come from the Step 4 metric CSVs of the
+    collection named above.
 
 Vapor pressure deficit combines temperature and relative humidity into one
 variable (see [Step 2](../user-guide/step2-prepare.md#derived-features)). If VPD
