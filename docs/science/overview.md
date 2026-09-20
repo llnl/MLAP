@@ -45,8 +45,10 @@ unestablished rather than as a finding.
 
 ## Headline findings
 
-- **Random Forest substantially outperforms MLP** on identical datasets — R²
-  around 0.89 against 0.79. See [ML Parameters](ml-parameters.md).
+- **Random Forest substantially outperforms the MLP as configured** on identical
+  datasets — R² around 0.89 against 0.79. The MLP appears to be stopping training
+  prematurely, so this is not yet a fair comparison between the two methods. See
+  [ML Parameters](ml-parameters.md#why-the-mlp-underperforms-random-forest).
 - **Most hyperparameters barely matter.** Two exceptions dominate everything
   else: Random Forest `bootstrap` and MLP `solver`.
 - **Spatial and temporal sampling behave differently.** More grid points improves
