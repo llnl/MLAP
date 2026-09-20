@@ -29,15 +29,18 @@ scatter between datasets, that is said explicitly.
 
 ## Assessment performed
 
-Four groups of studies were run, spanning 27 evaluation collections and drawing
-on datasets from 1 to 15 million rows.
+Five groups of studies were run, spanning 27 evaluation collections and drawing
+on datasets from 1 to 15 million rows. Random Forest is the baseline model
+throughout; the Multi-layer Perceptron study exists to show the same machinery
+running on a second model family.
 
 | Study | Question | Scope |
 |---|---|---|
 | [Data Sampling](data-sampling.md) | How many reference times and grid points are needed? | 7 datasets, 2–15 million rows |
 | [Historical Data](history.md) | How far back must atmospheric history reach, and how finely sampled? | 9 datasets; 32–48 h maximum history, 1–8 h interval |
-| [ML Parameters](ml-parameters.md) | Which Random Forest and MLP hyperparameters matter? | 12 hyperparameter studies, each across 3 datasets |
+| [Random Forest Parameters](ml-parameters.md) | Which hyperparameters of the baseline model matter? | 4 hyperparameter studies, each across 3 datasets |
 | [Physical Quantities](physical-quantities.md) | Which atmospheric variables actually carry the signal? | 3 feature studies across 4 datasets |
+| [Multi-layer Perceptron](mlp.md) | Can MLAP run the same parametric machinery on a second model family? | 8 hyperparameter studies, each across 3 datasets |
 
 Every hyperparameter and feature study was repeated on more than one dataset, so
 an effect that does not reproduce across all of them is reported as
@@ -48,7 +51,7 @@ unestablished rather than as a finding.
 - **Random Forest substantially outperforms the MLP as configured** on identical
   datasets — R² around 0.89 against 0.79. The MLP appears to be stopping training
   prematurely, so this is not yet a fair comparison between the two methods. See
-  [ML Parameters](ml-parameters.md#why-the-mlp-underperforms-random-forest).
+  [Multi-layer Perceptron](mlp.md#why-the-mlp-underperforms-random-forest).
 - **Most hyperparameters barely matter.** Two exceptions dominate everything
   else: Random Forest `bootstrap` and MLP `solver`.
 - **Spatial and temporal sampling behave differently.** More grid points improves

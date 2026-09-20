@@ -84,7 +84,7 @@ When adding scientific results, cite the metric CSVs from
 and report the dataset identifiers so a reader can locate the source. Where a
 result has not been reproduced across more than one dataset, say so — several
 apparent effects in the
-[MLP study](../science/ml-parameters.md#summary-of-the-eight-studies)
+[MLP study](../science/mlp.md#summary-of-the-eight-studies)
 disappeared under that check.
 
 ## Reporting issues

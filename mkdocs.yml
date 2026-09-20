@@ -94,7 +94,8 @@ nav:
       - Assessments:
           - Data Sampling: science/data-sampling.md
           - Historical Data: science/history.md
-          - ML Parameters: science/ml-parameters.md
+          - Random Forest Parameters: science/ml-parameters.md
           - Physical Quantities: science/physical-quantities.md
+          - Multi-layer Perceptron: science/mlp.md
   - Development:
       - Contributing: development/contributing.md
