@@ -77,6 +77,28 @@ chosen automatically from the `label_type` set in
 `"Linear"` has no classification counterpart. The framework is straightforward to
 extend with additional models.
 
+### Ready-made configuration files
+
+The repository ships one configuration per model, already filled in, so each can
+be run without writing a config from scratch:
+
+| File | `model_name` | `model_count` | `params` |
+|---|---|---|---|
+| `json_train_model_Linear.json` | `Linear` | 4 | empty — scikit-learn defaults |
+| `json_train_model_RF.json` | `RF` | 3 | empty — scikit-learn defaults |
+| `json_train_model_GB.json` | `GB` | 5 | empty — scikit-learn defaults |
+| `json_train_model_MLP.json` | `MLP` | 1 | 22 parameters set explicitly |
+| `json_train_model_SVM.json` | `SVM` | 2 | 10 parameters set explicitly |
+
+All five use `scaler_type` `Standard`, a `test_data_frac` of 0.2 and the same
+`qois_for_training` of `["UMag10", "T2", "RH", "PREC", "SW"]`, so they differ
+only in the model and its parameters.
+
+The `model_count` values are the identifiers these configurations carry through
+the rest of the pipeline — see
+[Nomenclature](running-on-hpc.md#nomenclature). They are distinct so the five can
+coexist in one study.
+
 ## Model hyperparameters
 
 By default models use scikit-learn defaults. `params` overrides them, passed

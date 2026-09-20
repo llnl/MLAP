@@ -230,6 +230,74 @@ Model mapping:
 | `"MLP"` | `MLPRegressor` | `MLPClassifier` |
 | `"GB"` | `GradientBoostingRegressor` | `GradientBoostingClassifier` |
 
+#### `models.params`
+
+Whatever appears here is handed straight to the scikit-learn constructor, so any
+argument that estimator accepts is valid and MLAP needs no change to support it.
+An empty `{}` uses scikit-learn defaults, which is what the Linear, Random Forest
+and Gradient Boosting configurations do.
+
+Two of the shipped configurations populate it. The values below are what the
+repository ships, not recommendations — see
+[ML Parameters](../science/ml-parameters.md) and
+[Multi-layer Perceptron](../science/mlp.md) for what the studies found.
+
+**`json_train_model_MLP.json`** — `MLPRegressor` / `MLPClassifier`:
+
+| Key | Shipped value | Meaning |
+|---|---|---|
+| `hidden_layer_sizes` | `[15, 15]` | Neurons per hidden layer |
+| `activation` | `"relu"` | `"identity"`, `"logistic"`, `"tanh"`, `"relu"` |
+| `solver` | `"adam"` | `"lbfgs"`, `"sgd"`, `"adam"` |
+| `alpha` | `0.0001` | L2 penalty strength |
+| `batch_size` | `"auto"` | Minibatch size for `sgd` / `adam` |
+| `learning_rate` | `"constant"` | `"constant"`, `"invscaling"`, `"adaptive"` — `sgd` only |
+| `learning_rate_init` | `0.001` | Initial step size |
+| `power_t` | `0.5` | Exponent for `"invscaling"` |
+| `max_iter` | `500` | Maximum iterations (epochs for `sgd` / `adam`) |
+| `shuffle` | `true` | Reshuffle samples each iteration |
+| `random_state` | `null` | Seed for reproducibility |
+| `tol` | `0.001` | Convergence tolerance — see the warning below |
+| `verbose` | `true` | Print progress |
+| `warm_start` | `false` | Reuse the previous solution |
+| `momentum` | `0.9` | Momentum for `sgd` |
+| `nesterovs_momentum` | `true` | Nesterov momentum for `sgd` |
+| `early_stopping` | `false` | Stop on validation score instead of loss |
+| `validation_fraction` | `0.1` | Hold-out fraction when `early_stopping` is on |
+| `beta_1`, `beta_2` | `0.9`, `0.999` | `adam` decay rates |
+| `epsilon` | `1e-8` | `adam` numerical stability |
+| `n_iter_no_change` | `10` | Iterations without improvement before stopping |
+| `max_fun` | `15000` | Maximum loss-function calls for `lbfgs` |
+
+!!! warning "`tol` is too loose at this label scale"
+    Training stops when the loss fails to improve by more than `tol` for
+    `n_iter_no_change` consecutive iterations. The shipped value of `1e-3` is
+    close to the converged training MSE of about `0.0014`, so the criterion fires
+    almost immediately and the network underfits. It is also ten times looser
+    than scikit-learn's own default of `1e-4`. See
+    [Why the MLP underperforms Random Forest](../science/mlp.md#why-the-mlp-underperforms-random-forest).
+
+**`json_train_model_SVM.json`** — `SVR` / `SVC`:
+
+| Key | Shipped value | Meaning |
+|---|---|---|
+| `kernel` | `"rbf"` | `"linear"`, `"poly"`, `"rbf"`, `"sigmoid"`, `"precomputed"` |
+| `degree` | `3` | Polynomial degree — `"poly"` only |
+| `gamma` | `"scale"` | Kernel coefficient; `"scale"`, `"auto"`, or a float |
+| `coef0` | `0.0` | Independent term — `"poly"` and `"sigmoid"` |
+| `tol` | `0.001` | Stopping tolerance |
+| `C` | `1.0` | Regularization strength; lower means stronger |
+| `shrinking` | `true` | Use the shrinking heuristic |
+| `cache_size` | `200` | Kernel cache in MB |
+| `verbose` | `true` | Print progress |
+| `max_iter` | `-1` | Iteration limit; `-1` means no limit |
+
+!!! note "SVM cost"
+    Kernel SVMs scale poorly beyond roughly 10,000 samples, and the datasets here
+    run to millions of rows. No SVM results appear in the
+    [scientific assessment](../science/overview.md) for that reason. Raising
+    `cache_size` helps somewhat; a `"linear"` kernel is far cheaper than `"rbf"`.
+
 ### `features_labels`
 
 | Key | Type | Description |

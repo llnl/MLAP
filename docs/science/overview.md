@@ -21,6 +21,32 @@ Where a trend is consistent across `train`, `test`, `test_p95` and `rmse`, it is
 reported as a trend. Where metrics disagree or the effect is smaller than the
 scatter between datasets, that is said explicitly.
 
+## Results archive
+
+Every study on these pages names the **evaluation collection** it came from —
+`eval_015_RF_estimator_effect`, for example. That identifier is the link between
+a number in the documentation and the run that produced it: it appears in the
+collection's directory name, in every plot and CSV filename inside it, and in
+the [Step 4](../user-guide/step4-evaluate.md) configuration that generated it.
+
+Each collection also records the datasets it used in
+`<collection>_data_defn.csv`, and each dataset is identified by its
+`data_set_count` from [Step 1](../user-guide/step1-extract.md).
+
+The simulation output backing these pages is archived at:
+
+<https://drive.google.com/drive/folders/1Mi1s9He0AsPTgG9OjPES-twJyBbZREdV>
+
+!!! note
+    The identifiers, not the link, are what make a result traceable. They are
+    location-independent, so the archive can move without invalidating anything
+    written here.
+
+The archive holds 27 collections. Twenty-four are cited across these pages. The
+remaining three — `eval_000_test`, `eval_001_many_cases` and
+`eval_013_many_cases` — are exploratory runs spanning many datasets and models
+at once, superseded by the focused collections above and not cited.
+
 !!! info "Two tiers of result"
     Some sections correspond to written sections of the fuel moisture assessment
     manuscript. Others report studies that were **run but not yet written up** —

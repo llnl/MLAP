@@ -21,6 +21,8 @@ is for.
 
 ## Effect of elevation
 
+*Source: `eval_004_elevation_effect`*
+
 Elevation (`HGT`) is the only feature that does not vary with time. Each dataset
 was trained with and without it.
 
@@ -45,6 +47,8 @@ without elevation.
 At one feature out of 41, elevation is cheap. **Keep it.**
 
 ## Effect of precipitation and shortwave flux
+
+*Source: `eval_005_precip_flux_effect`*
 
 !!! info "Results not yet in the manuscript"
     This section is a placeholder in the manuscript; the numbers come from the
@@ -90,6 +94,11 @@ however decisive it is when it does occur.
     is not.
 
 ## Temperature, humidity, and vapor pressure deficit
+
+*Source: `eval_012_temp_rh_vpd`, which consolidates the six combinations also run
+individually as `eval_006_replace_temp_rh_by_vpd`, `eval_007_drop_rh`,
+`eval_008_drop_temp`, `eval_009_replace_temp_by_vpd` and
+`eval_010_replace_rh_by_vpd`*
 
 !!! info "Results not yet in the manuscript"
     This section is a placeholder in the manuscript; the numbers come from the
