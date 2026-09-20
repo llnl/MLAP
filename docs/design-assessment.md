@@ -260,6 +260,66 @@ making the decision can see the whole space at once and pick a coherent slice.
     assembling a collection is selection rather than recall. The colour matrix
     above is a workable format to copy.
 
+## Applicability beyond wildfire
+
+MLAP was built to study wildfire fuel moisture, and its default quantities are
+wildfire's. The **architecture**, though, assumes nothing about the domain. What
+it actually implements is a general shape:
+
+> Relate a target variable at a reference time to the **history of driving
+> variables** preceding it, sampled on a spatiotemporal grid, then train and
+> compare models across a matrix of configurations.
+
+That shape recurs across atmospheric science. Substitute the target and the
+driving variables and the machinery is unchanged.
+
+### How tightly each stage is bound to the domain
+
+Counting wildfire-specific identifiers — `FM_*`, `UMag10`, `SWDOWN`, fuel,
+Nevada — across each stage's source gives a clear gradient:
+
+| Stage | Domain references | Coupling | What porting would need |
+|---|---|---|---|
+| **Step 4** Evaluate | 2 | **Negligible** | Both are the variable name `FM_label_type`, which only carries `Regression`/`Binary`/`MultiClass`. Rename it and the stage is already generic |
+| **Step 3** Train | 18 | **Low** | Model construction, scaling and metrics are plain scikit-learn. Mostly hardcoded development paths and the same label-type name |
+| **Step 2** Prepare | 47 | **Moderate** | Label construction is generic — a threshold makes binary classes, a level list makes multi-class. The naming says FM, and the derived-feature computation (VPD) is meteorological |
+| **Step 1** Extract | 66 | **High** | The real coupling: NetCDF variable names, the domain clip, fire-event timestamps, and the quantity list |
+| **Step 5** Analyze | 98 | **High** | Fuel maps, region handling, and readers for specific data products |
+
+The middle of the pipeline — the part that does the machine learning — is close
+to domain-neutral already. The coupling sits at the two ends, where data enters
+and where results are rendered.
+
+### What transfers unchanged
+
+- **The nomenclature.** A (dataset, label, model) triple identifies a run
+  regardless of what is being predicted
+- **JSON-driven staging**, and the verification gates between stages
+- **History-based feature construction** — \(t_{max\_history}\) and
+  \(t_{history}\) describe any lagged-predictor problem
+- **The collection matrix**, and exhaustive metric capture at the run level
+- **Regression, binary and multi-class** handling, which is label-shape logic
+  rather than fuel-moisture logic
+
+### What a port would actually involve
+
+**Configuration only**, if the new data resembles the existing source: point
+`qois_to_read` and `labels_to_read` at different variables, adjust the history
+window to the timescale of the new target, and map the source's variable names
+using the same mechanism that already supports HRRR and E3SM
+([Step 1](user-guide/step1-extract.md#reading-other-data-sources)).
+
+**Code changes**, for anything further: a reader for a differently structured
+data product, domain-specific derived features in place of VPD, and rendering in
+Step 5 appropriate to the new target. Renaming the `FM_*` identifiers to
+something neutral would be cosmetic but worth doing.
+
+!!! note "A claim about design, not a demonstration"
+    MLAP has only been run on wildfire fuel moisture. The generality above is
+    assessed from the structure of the code, not from a port that has actually
+    been carried out. The two ends of the pipeline would need real work; the
+    middle would not.
+
 ## Where the design has gaps
 
 **Code-version provenance is absent.** Results record parameters but not which

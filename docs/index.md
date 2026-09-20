@@ -12,6 +12,15 @@ planning and protection decisions for wildlands, populations, and infrastructure
 Every stage is driven by a JSON input file, so large parametric studies can be
 run and interpreted without hand-editing code.
 
+!!! info "Built for wildfire, designed more generally"
+    The quantities throughout this documentation are wildfire's, but the
+    structure is not specific to it: MLAP relates a target variable to the
+    history of driving variables preceding it on a spatiotemporal grid. Other
+    atmospheric-science problems of that shape can use the same machinery with
+    different variables — see
+    [Applicability beyond wildfire](design-assessment.md#applicability-beyond-wildfire)
+    for what transfers unchanged and what would need code.
+
 ## The pipeline
 
 ![Stages in the machine learning automation pipeline](assets/fig-mlap-stages.png)
