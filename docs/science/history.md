@@ -4,7 +4,8 @@ MLAP predicts fuel moisture at a reference time from the history of atmospheric
 conditions preceding it. Two parameters define that history:
 
 - \(t_{max\_history}\) (`max_history_to_consider`) — how far back to look
-- \(t_{history}\) (`history_interval`) — how often to sample within that window
+- \(t_{history}\) (`history_interval`) — how often to sample within that window,
+  that is, the temporal resolution of the history
 
 Both drive feature count directly, so both trade accuracy against cost.
 
@@ -40,7 +41,7 @@ for 10-hour fuels. **\(t_{max\_history} = 32\) h is the recommended baseline.**
 Larger fuel categories equilibrate more slowly, so 100-hour and 1000-hour fuels
 would be expected to need longer windows. That has not been tested.
 
-## Effect of history interval
+## Effect of history interval (temporal resolution)
 
 Four datasets were extracted with \(t_{max\_history}\) fixed at 32 h and
 \(t_{history}\) varied. These use 1,000 reference times and 1,000 grid points —
