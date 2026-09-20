@@ -113,3 +113,43 @@
 .md-typeset a code {
   color: inherit;
 }
+
+/*
+ * Feature-selection matrix on the design assessment page, mirroring the colour
+ * coding used in the experiment registry spreadsheet.
+ */
+.feature-matrix {
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  margin: 1em 0;
+}
+
+.feature-matrix th,
+.feature-matrix td {
+  border: 1px solid #e1e4e5;
+  padding: 4px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.feature-matrix th {
+  background: #f3f4f4;
+  color: #404040;
+  font-weight: 700;
+}
+
+.feature-matrix td.on {
+  background: #00b050;
+  color: #fff;
+  font-weight: 700;
+}
+
+.feature-matrix td.grp {
+  text-align: left;
+  font-style: italic;
+}
+
+[data-md-color-scheme="slate"] .feature-matrix th {
+  background: #3b3b3b;
+  color: #e6e6e6;
+}

@@ -20,6 +20,11 @@ specific problem, and the review is direct evidence that they solve it.
     Draft papers covering the pipeline and the science exist but are work in
     progress and unpublished, so nothing here depends on them.
 
+    The review covers the pipeline **as it stood in September 2024** — the most
+    recent functional change to the source is dated August 2024. Everything
+    added since is documentation; no assessment here reflects a change to the
+    code itself.
+
 ## How this was scored
 
 | Criterion | What MLAP does | Rating | What would make it perfect |
@@ -137,16 +142,112 @@ training are submitted separately and deliberately. A flawed extraction cannot
 silently propagate into trained models, because a human confirms each stage
 before the next is launched.
 
-## What experimentation looks like here
+## How a collection is assembled
 
-Several collections were superseded as understanding developed — collections 6
-through 9 were replaced by collection 12. That is not untidiness. Changing a JSON
-file and resubmitting is cheap enough that unpromising directions can be tried
-and abandoned, and only the informative subset needs writing up.
+A collection is not generated automatically. It is a curated comparison, and
+understanding how one is built explains both the strength and the one genuine
+limit of this stage.
 
-The decision of what to run next depended on reading the previous results. That
-sequence is research judgement rather than pipeline configuration, and it is the
-reason the study plan could not simply be declared up front.
+### The feature-selection matrix
+
+Each row below is one training configuration — one `json_train_model_NNN.json`
+file. A green cell means the feature was included. This reproduces the colour
+coding used in the experiment registry spreadsheet, which is where the selection
+is actually made.
+
+<table class="feature-matrix" markdown="0">
+<thead><tr>
+<th>json_train</th><th>Model</th>
+<th>HGT</th>
+<th>UMag10</th>
+<th>T2</th>
+<th>RH</th>
+<th>VPD</th>
+<th>PREC</th>
+<th>SW</th>
+<th>Group</th></tr></thead>
+<tbody>
+<tr><td><strong>3</strong></td><td>RF</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="grp">set A</td></tr>
+<tr><td><strong>6</strong></td><td>RF</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td class="on">&#10003;</td><td></td><td class="grp"></td></tr>
+<tr><td><strong>7</strong></td><td>RF</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td class="grp"></td></tr>
+<tr><td><strong>8</strong></td><td>RF</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td></td><td class="grp"></td></tr>
+<tr><td><strong>9</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="grp">set B</td></tr>
+<tr><td><strong>10</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td class="on">&#10003;</td><td></td><td class="grp"></td></tr>
+<tr><td><strong>11</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td class="grp"></td></tr>
+<tr><td><strong>12</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td></td><td class="grp"></td></tr>
+<tr><td><strong>13</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td class="grp">set C</td></tr>
+<tr><td><strong>14</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td class="grp"></td></tr>
+<tr><td><strong>15</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td></td><td class="on">&#10003;</td><td class="grp"></td></tr>
+<tr><td><strong>16</strong></td><td>RF</td><td class="on">&#10003;</td><td class="on">&#10003;</td><td></td><td></td><td class="on">&#10003;</td><td></td><td></td><td class="grp"></td></tr>
+</tbody>
+</table>
+
+Three groups fall out of it, each holding a base feature set constant while
+varying only `PREC` and `SW`:
+
+- **Set A** — `UMag10, T2, RH` (no elevation)
+- **Set B** — `HGT, UMag10, T2, RH` (elevation added)
+- **Set C** — `HGT, UMag10, VPD` (temperature and humidity replaced by VPD)
+
+### The same structure in the Step 4 configuration
+
+Those twelve rows transcribe directly into
+[`json_eval_sample.json`](user-guide/step4-evaluate.md#the-collection-matrix):
+
+```json
+"json_prep_train_maps": [
+    { "json_label": [6], "json_train": [3, 6, 7, 8],
+      "set_info": ["UMag10, T2, RH"],
+      "subset_info": ["PREC, SW", "PREC", "SW", ""] },
+
+    { "json_label": [6], "json_train": [9, 10, 11, 12],
+      "set_info": ["HGT, UMag10, T2, RH"],
+      "subset_info": ["PREC, SW", "PREC", "SW", ""] },
+
+    { "json_label": [7], "json_train": [13, 14, 15, 16],
+      "set_info": ["HGT, UMag10, VPD"],
+      "subset_info": ["PREC, SW", "PREC", "SW", ""] }
+]
+```
+
+The correspondence is exact, and it is worth reading in both directions:
+
+| Registry | Step 4 configuration | Meaning |
+|---|---|---|
+| Row number | entry in `json_train` | which training configuration |
+| Green cells, shared across the group | `set_info` | the base feature set |
+| Green cells that vary within the group | `subset_info` | what is added or withheld |
+| Label column | `json_label` | which prepared labels — note set C uses label 7, which carries actual VPD rather than a placeholder |
+
+Nothing in the pipeline enforces that correspondence. `set_info` and
+`subset_info` are free text used only as plot legends, so if they drift from what
+the referenced configurations actually do, the plots will be labelled wrongly and
+nothing will complain. **The registry is what keeps them honest.**
+
+### Why this stage resists automation
+
+Steps 1 to 3 are mechanical: given a list of identifiers, the runs can be
+generated and submitted without judgement. Step 4 is different, and deliberately
+so.
+
+Deciding which runs belong in a collection means deciding what comparison is
+worth making — and that depends on what the previous collection showed. Several
+collections here were superseded as understanding developed: collections 6
+through 9 were replaced by collection 12 once it became clear the questions were
+better asked together.
+
+That loop — run, read, decide what to ask next — is research rather than
+configuration. Automating it would mean automating the judgement. What *can*
+be systematised is the bookkeeping underneath it, which is exactly what the
+registry does: it records what every configuration contained, so the person
+making the decision can see the whole space at once and pick a coherent slice.
+
+!!! tip "Keeping a registry of your own"
+    Anyone running studies at this scale should keep the equivalent. It need not
+    be a spreadsheet — the requirement is only that, for every training
+    configuration, you can see at a glance which features it used, so that
+    assembling a collection is selection rather than recall. The colour matrix
+    above is a workable format to copy.
 
 ## Where the design has gaps
 
