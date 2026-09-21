@@ -53,7 +53,7 @@ the archive alongside the inputs and outputs.
 **[Claude Opus 5](https://www.anthropic.com/claude/opus)** was given the
 repository and the [results archive](science/overview.md#results-archive) —
 roughly 8,600 output files — with no access to the machine that produced them,
-no notebook of record, and no explanation of the naming conventions.
+no record of what was run, and no explanation of the naming conventions.
 
 | Artifact | Count |
 |---|---|

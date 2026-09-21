@@ -11,7 +11,6 @@ MLAP is pure Python and relies on the scientific Python stack:
 | `scikit-learn` | All ML models, scalers, and metrics |
 | `matplotlib` | Plots at every step |
 | `netCDF4` | Reading raw reanalysis files |
-| `jupyter` | Notebooks are the canonical source (see below) |
 
 ## Getting the code
 
@@ -34,26 +33,20 @@ MachineLearningAutomationPipleline/
 
 `Others/` holds archived and miscellaneous code that is not part of the pipeline.
 
-## Notebooks are the source of truth
+## The scripts are the source of truth
 
-Each step exists as both a notebook and a script. **The notebook is canonical**;
-the `.py` file is generated from it:
+Each pipeline step is a `.py` file, and that file is what runs and what you
+edit. The batch scripts submit it directly.
 
-```bash
-jupyter nbconvert --to python Extract_DFM_Data.ipynb
+```text
+MachineLearningAutomationPipleline/Step1_ExtractData/Extract_DFM_Data.py
 ```
 
-The batch scripts run the generated `.py` file, not the notebook. So the workflow
-is:
-
-1. Edit the `.ipynb`
-2. Regenerate the `.py` with `nbconvert`
-3. Submit the `.py` via sbatch
-
-!!! warning "Regenerate before submitting"
-    If you edit a notebook and forget to re-run `nbconvert`, your batch job
-    silently runs the **old** code. Some `.py` files in the repository are
-    currently older than their notebooks.
+!!! note "Notebooks in the repository"
+    Some steps still carry a `.ipynb` alongside the script, left from how the
+    code was first written. They are **not** part of the pipeline and are not
+    kept in step with the scripts, so treat them as history rather than as
+    something to edit and convert.
 
 ## Running a step
 
@@ -72,6 +65,27 @@ python TrainModel.py json_extract_data.json json_prep_data_label.json json_train
 ```
 
 For running many cases on a cluster, see [Running on HPC](running-on-hpc.md).
+
+!!! tip "Running a step without arguments, for testing"
+    Each script reads its JSON paths from `sys.argv`, which is how the batch
+    scripts invoke it. Directly above those lines sits a commented block of
+    absolute paths:
+
+    ```python
+    # Input file paths for testing and experimentation.
+    # Uncomment and edit these to run the script outside the batch system.
+
+    #json_file_extract_data = '/p/lustre2/.../json_extract_data_022.json'
+
+    # Input file paths taken from the command line.
+    # This is how the batch scripts invoke this file, and the normal path.
+
+    json_file_extract_data = sys.argv[1]
+    ```
+
+    Uncomment and edit them to run a step interactively with fixed inputs.
+    Leave the committed copy on `sys.argv`, or batch jobs will silently read
+    whichever file the absolute paths point at instead of their arguments.
 
 ## Data paths
 

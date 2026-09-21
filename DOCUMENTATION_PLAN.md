@@ -154,8 +154,9 @@ these figures instead. Excluded by decision, not oversight.
    code supports `Standard` as well, which is what the Random Forest
    configuration uses.
 
-5. **Notebook / script staleness.** Some `.py` files are older than the
-   `.ipynb` they are generated from, and the batch scripts run the `.py`.
+5. ~~**Command-line input is commented out.**~~ Fixed: all seven step scripts
+   now read their JSON paths from `sys.argv`, with the absolute development
+   paths kept commented above for testing and experimentation.
 
 6. **No docstrings.** 0 of 77 functions and classes. Forecloses API autodoc.
 
