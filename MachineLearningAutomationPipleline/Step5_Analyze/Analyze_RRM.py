@@ -60,20 +60,22 @@ global_initial_memory = process.memory_info().rss
 
 # Read the Input JSON File
 
-# Input file name for an interactive run
+# Input file paths for testing and experimentation.
+# Uncomment and edit these to run the script outside the batch system.
 
-json_file_extract_data = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Extract/json_extract_data_039.json'
-json_file_prep_data    = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Prep/json_prep_data_label_006.json'
-json_file_train_model  = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Train/json_train_model_007.json'
-json_file_trends      = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Trends/json_trends_002.json'
+#json_file_extract_data = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Extract/json_extract_data_039.json'
+#json_file_prep_data    = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Prep/json_prep_data_label_006.json'
+#json_file_train_model  = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Train/json_train_model_007.json'
+#json_file_trends      = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Trends/json_trends_002.json'
 
 
-# Input file name taken from the command line
+# Input file paths taken from the command line.
+# This is how the batch scripts invoke this file, and the normal path.
 
-#json_file_extract_data = sys.argv[1]
-#json_file_prep_data = sys.argv[2]
-#json_file_train_model = sys.argv[3]
-#json_file_trends  = sys.argv[4]
+json_file_extract_data = sys.argv[1]
+json_file_prep_data = sys.argv[2]
+json_file_train_model = sys.argv[3]
+json_file_trends  = sys.argv[4]
 
 # Load the JSON file for extracting data
 

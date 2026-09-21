@@ -34,14 +34,16 @@ from TrainModel_Helper import *
 
 # Read the Input JSON File
 
-# Input file name for an interactive run
+# Input file paths for testing and experimentation.
+# Uncomment and edit these to run the script outside the batch system.
 
-json_file_eval_models = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Eval/json_eval_000.json'
+#json_file_eval_models = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Eval/json_eval_000.json'
 
 
-# Input file name taken from the command line
+# Input file paths taken from the command line.
+# This is how the batch scripts invoke this file, and the normal path.
 
-#json_file_eval_models = sys.argv[1]
+json_file_eval_models = sys.argv[1]
 
 # Load the JSON file for evaluating trained models
 
