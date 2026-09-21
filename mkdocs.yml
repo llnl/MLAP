@@ -91,7 +91,7 @@ nav:
       - Reference:
           - JSON Reference: user-guide/json-reference.md
   - Science with MLAP:
-      - Overview: science/overview.md
+      - Science Overview: science/overview.md
       - Assessments:
           - Data Sampling: science/data-sampling.md
           - Historical Data: science/history.md

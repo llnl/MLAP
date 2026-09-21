@@ -233,12 +233,36 @@
  * rule rather than a box, so it reads as a wayfinding strip and not as content.
  */
 .md-typeset .mlap-pagenav {
+  background: var(--md-default-bg-color);
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
   display: flex;
   gap: 1rem;
   justify-content: space-between;
   margin: 0 0 1.4rem;
   padding-bottom: .5rem;
+  padding-top: .6rem;
+  position: sticky;
+  top: 2.4rem;
+  z-index: 2;
+}
+
+/*
+ * Sticky, so the links stay reachable while reading rather than only at the
+ * top. 2.4rem is the header height — the same offset Material's own sidebar
+ * sticks at. Sticking ends at the foot of .md-content__inner, so the strip
+ * travels the whole page and releases at the end of the content.
+ *
+ * An opaque background is required: without it the page text scrolls through
+ * the strip.
+ */
+
+/*
+ * Anchor targets need to clear the strip as well as the header. Material sets
+ * 3.6rem for the header alone; the extra covers the strip, so a linked heading
+ * lands below it rather than behind it.
+ */
+.md-typeset :target {
+  --md-scroll-margin: 6.4rem;
 }
 
 .md-typeset .mlap-pagenav__link {
@@ -283,5 +307,10 @@
 
   .md-typeset .mlap-pagenav__link {
     max-width: 100%;
+  }
+
+  /* Stacked, the strip is roughly one line taller */
+  .md-typeset :target {
+    --md-scroll-margin: 8.4rem;
   }
 }
