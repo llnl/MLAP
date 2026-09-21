@@ -196,3 +196,17 @@
 .md-typeset h6 code {
   color: inherit;
 }
+
+/*
+ * Admonitions at body size. Material sets .64rem, which reads as a footnote
+ * beside the text it sits in — wrong for boxes carrying substantive content.
+ *
+ * `inherit` rather than a fixed .8rem, so the boxes track the surrounding type
+ * at every breakpoint instead of pinning to one size. The title stays bold
+ * through Material's own font-weight rule, and the icon keeps its position
+ * because the title's padding and the icon box are sized in rem, not em.
+ */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: inherit;
+}
