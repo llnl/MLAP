@@ -21,6 +21,7 @@ theme:
   name: material
   features:
     - navigation.expand
+    - navigation.footer
     - navigation.top
     - navigation.tracking
     - content.code.copy

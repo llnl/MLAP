@@ -153,3 +153,60 @@
   background: #3b3b3b;
   color: #e6e6e6;
 }
+
+/*
+ * Heading colours: one blue ramp, graded by level.
+ *
+ * In the light scheme the ramp runs dark to light as headings get deeper, so
+ * depth reads as decreasing weight. In the slate scheme it is inverted — light
+ * to dark — for the same reason against a dark ground.
+ *
+ * Steps are spaced evenly in relative luminance rather than in hex value, and
+ * every level clears 4.5:1 against its own background: 16.9:1 down to 4.8:1 in
+ * light, 9.9:1 down to 4.8:1 in slate.
+ */
+
+:root {
+  --mlap-h1-color: #061e33;
+  --mlap-h2-color: #093255;
+  --mlap-h3-color: #0d4677;
+  --mlap-h4-color: #115998;
+  --mlap-h5-color: #1469b3;
+  --mlap-h6-color: #1675c9;
+}
+
+[data-md-color-scheme="slate"] {
+  --mlap-h1-color: #cbe2f7;
+  --mlap-h2-color: #b3d5f3;
+  --mlap-h3-color: #99c6ee;
+  --mlap-h4-color: #7eb8ea;
+  --mlap-h5-color: #66abe6;
+  --mlap-h6-color: #55a1e3;
+}
+
+.md-typeset h1 { color: var(--mlap-h1-color); }
+.md-typeset h2 { color: var(--mlap-h2-color); }
+.md-typeset h3 { color: var(--mlap-h3-color); }
+.md-typeset h4 { color: var(--mlap-h4-color); }
+.md-typeset h5 { color: var(--mlap-h5-color); }
+.md-typeset h6 { color: var(--mlap-h6-color); }
+
+/* Keep inline code in the two deepest levels inheriting the heading colour */
+.md-typeset h5 code,
+.md-typeset h6 code {
+  color: inherit;
+}
+
+/*
+ * Admonitions at body size. Material sets .64rem, which reads as a footnote
+ * beside the text it sits in — wrong for boxes carrying substantive content.
+ *
+ * `inherit` rather than a fixed .8rem, so the boxes track the surrounding type
+ * at every breakpoint instead of pinning to one size. The title stays bold
+ * through Material's own font-weight rule, and the icon keeps its position
+ * because the title's padding and the icon box are sized in rem, not em.
+ */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: inherit;
+}
