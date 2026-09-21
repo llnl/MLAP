@@ -314,3 +314,29 @@
     --md-scroll-margin: 8.4rem;
   }
 }
+
+/*
+ * Breadcrumb trail in the header, rendered by overrides/partials/header.html
+ * in place of the site name.
+ *
+ * Spacing lives here rather than in the template because the Jinja macro
+ * strips whitespace around each crumb.
+ *
+ * Material sets font-weight 700 on the first header topic, which would bold
+ * the whole trail; the ancestors are stepped back to normal weight so the
+ * current page stays the emphasised one.
+ */
+.md-header__topic .mlap-crumb {
+  font-weight: 400;
+  opacity: .75;
+}
+
+.md-header__topic .mlap-crumb--current {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.md-header__topic .mlap-crumb__sep {
+  margin: 0 .35em;
+  opacity: .6;
+}
