@@ -3,7 +3,7 @@ site_description: >-
   Machine Learning Automation Pipeline for wildfire fuel moisture prediction
 site_url: https://software.llnl.gov/MLAP/
 repo_url: https://github.com/LLNL/MLAP
-repo_name: LLNL/MLAP
+repo_name: Lawrence Livermore GitHub
 copyright: >-
   Pankaj K. Jha &middot; Lawrence Livermore National Laboratory &middot;
   <a href="https://github.com/LLNL/MLAP">github.com/LLNL/MLAP</a> &middot;
@@ -20,6 +20,8 @@ validation:
 theme:
   name: material
   custom_dir: overrides
+  icon:
+    repo: fontawesome/brands/github
   features:
     - navigation.expand
     - navigation.top
