@@ -319,7 +319,6 @@ def plot_FM_labels (df, FM_label_type, FM_hr, \
     plt.savefig(os.path.join(filedir, filename), bbox_inches='tight')
     #plt.show()
     
-    
 # []
 '''
 Split data into groups of keys

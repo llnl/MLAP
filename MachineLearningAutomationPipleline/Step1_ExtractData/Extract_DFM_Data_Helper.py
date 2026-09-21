@@ -227,9 +227,6 @@ def downsample_data_files (data_files_list, percent_files_to_use, max_history_to
     return sampled_file_indices, sampled_data_files
 
 
-
-
-
 # []
 '''
 Get the history file indices corresponding to the sampled reference time indices

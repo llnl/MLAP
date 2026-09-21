@@ -1,14 +1,6 @@
 #!/usr/bin/env python
-# coding: utf-8
 
-# ## Convert this notebook to executable python script using:
-
-# - jupyter nbconvert --to python submit_multiple_runs.ipynb
-
-# ## Import Packages
-
-# In[ ]:
-
+# Import Packages
 
 import os
 import sys
@@ -16,51 +8,34 @@ import os.path as path
 import json
 
 
-# # Read the Input JSON File
+# Read the Input JSON File
 
-# ### Input file name when using jupyter notebook
+# Input file paths for testing and experimentation.
+# Uncomment and edit these to run the script outside the batch system.
 
-# In[ ]:
-
-
-json_file_simulate = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Simulate/json_simulate_000.json'
+#json_file_simulate = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Simulate/json_simulate_000.json'
 
 
-# ### Input file name when using python script on command line
+# Input file paths taken from the command line.
+# This is how the batch scripts invoke this file, and the normal path.
 
-# In[ ]:
+json_file_simulate = sys.argv[1]
 
-
-#json_file_simulate = sys.argv[1]
-
-
-# ### Load the JSON file for simulation
-
-# In[ ]:
-
+# Load the JSON file for simulation
 
 print('Loading the JSON file for simulation: \n {}'.format(json_file_simulate))
-
-
-# In[ ]:
 
 
 with open(json_file_simulate) as json_file_handle:
     json_content_simulate = json.load(json_file_handle)
 
 
-# ## Action To Be Taken
-
-# In[ ]:
-
+# Action To Be Taken
 
 action = json_content_simulate['action']
 
 
-# ## Execution Options
-
-# In[ ]:
-
+# Execution Options
 
 execution_options = json_content_simulate['execution_options']
 print_interactive_command = execution_options['print_interactive_command']
@@ -69,29 +44,17 @@ run_interactively = execution_options['run_interactively']
 submit_job    = execution_options['submit_job']
 
 
-# In[ ]:
-
-
 exempt_flag = json_content_simulate['exempt_flag'] #'--qos=exempt'
 
 
-# ## Simulation Directory
-
-# In[ ]:
-
+# Simulation Directory
 
 sim_dir = json_content_simulate['paths']['sim_dir']
 
 
-# ## `sbatch` Scripts
-
-# In[ ]:
-
+# `sbatch` Scripts
 
 sbatch_scripts = json_content_simulate['paths']['sbatch_scripts']
-
-
-# In[ ]:
 
 
 sbatch_script_extract = os.path.join(sbatch_scripts['base'], sbatch_scripts['extract'])
@@ -99,15 +62,9 @@ sbatch_script_prep = os.path.join(sbatch_scripts['base'], sbatch_scripts['prep']
 sbatch_script_train = os.path.join(sbatch_scripts['base'], sbatch_scripts['train'])
 
 
-# ## `python` Scripts
-
-# In[ ]:
-
+# `python` Scripts
 
 python_scripts = json_content_simulate['paths']['python_scripts']
-
-
-# In[ ]:
 
 
 python_script_extract = os.path.join(python_scripts['base'], python_scripts['extract'])
@@ -115,15 +72,9 @@ python_script_prep = os.path.join(python_scripts['base'], python_scripts['prep']
 python_script_train = os.path.join(python_scripts['base'], python_scripts['train'])
 
 
-# ## `json` Input Files
-
-# In[ ]:
-
+# `json` Input Files
 
 json_base = json_content_simulate['paths']['json_base']
-
-
-# In[ ]:
 
 
 json_extract_base = os.path.join(sim_dir, json_base['extract'])
@@ -131,10 +82,7 @@ json_prep_base = os.path.join(sim_dir, json_base['prep'])
 json_train_base = os.path.join(sim_dir, json_base['train'])
 
 
-# ## `json` Collections
-
-# In[ ]:
-
+# `json` Collections
 
 collection_options = json_content_simulate['collection_options']
 json_extract_counts = collection_options['json_extract_counts']
@@ -142,16 +90,10 @@ json_prep_counts = collection_options['json_prep_counts']
 json_train_counts = collection_options['json_train_counts']
 
 
-# In[ ]:
-
-
 json_extract_counts, json_prep_counts, json_train_counts
 
 
-# ## Generate and Execute `command`
-
-# In[ ]:
-
+# Generate and Execute `command`
 
 def get_commands (exempt_flag, sbatch_script, base_command):
     run_command = 'python {}'.format(base_command)
@@ -159,10 +101,6 @@ def get_commands (exempt_flag, sbatch_script, base_command):
     
     return run_command, sbatch_submit_command
     
-
-
-# In[ ]:
-
 
 def print_and_execute (print_interactive_command, print_sbatch_command,                        run_interactively, submit_job,                        run_command, sbatch_submit_command):
     if (print_interactive_command):
@@ -173,9 +111,6 @@ def print_and_execute (print_interactive_command, print_sbatch_command,         
         os.system (run_command)
     if (submit_job):
         os.system (sbatch_submit_command)
-
-
-# In[ ]:
 
 
 for data_count in json_extract_counts:
@@ -210,4 +145,3 @@ for data_count in json_extract_counts:
                 run_command, sbatch_submit_command = get_commands (                                        exempt_flag, sbatch_script_train, base_command)
                 print_and_execute (print_interactive_command, print_sbatch_command,                                    run_interactively, submit_job,                                    run_command, sbatch_submit_command)
                 continue
-

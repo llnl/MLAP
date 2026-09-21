@@ -33,22 +33,21 @@ the sampling logic — `downsample_data_files`, `remove_data_around_fire`,
     guide. Adding one while you are in a function is welcome — see
     [Docstrings](#docstrings).
 
-## Working with the notebooks
+## Working with the scripts
 
-Each pipeline step exists as a notebook and a generated script. **The notebook is
-canonical.** After editing one, regenerate its script:
+Each pipeline step is a `.py` file. Edit it directly and commit it — it is what
+the batch scripts submit and what every result in the archive was produced by.
 
-```bash
-jupyter nbconvert --to python Extract_DFM_Data.ipynb
-```
+Each step reads its JSON input paths from `sys.argv`, which is how
+`submit_multiple_runs.py` invokes it. A commented block of absolute paths sits
+directly above, for running a step by hand during testing and experimentation —
+uncomment and edit those, and restore `sys.argv` before committing.
 
-Commit both. The batch scripts run the `.py`, so a notebook edit that is not
-converted has no effect on a submitted job — it silently runs the old code.
-
-!!! warning "Known staleness"
-    Some `.py` files in the repository are currently older than their notebooks.
-    If you touch a step, check that its script is regenerated before relying on
-    batch results.
+!!! note "Notebooks in the repository"
+    Some steps still carry a `.ipynb` beside the script, left from how the code
+    was first written. They are not part of the pipeline and are not kept in
+    step with the scripts. Do not edit a notebook expecting the change to reach
+    a run.
 
 ## Adding a model
 

@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
 
 ### ==== === Standard === === === === === === === ===
 import os
@@ -167,7 +165,6 @@ def compute_best_90_95_labels (labels_gt, labels_pred, labels_error):
     return labels_error_p90, labels_error_p95, \
            labels_gt_best90, labels_pred_best90, \
            labels_gt_best95, labels_pred_best95
-
 
 
 # []
