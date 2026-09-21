@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{#-
+  Previous / Next navigation at the top of the page instead of in the footer.
+
+  Material renders the same pair at the foot of the page through its
+  `navigation.footer` feature. That feature is deliberately left out of
+  mkdocs.yml so the links appear in one place only.
+
+  `page.previous_page` and `page.next_page` are MkDocs page attributes and are
+  set from `nav:` order regardless of the feature flag, so each link is emitted
+  only where it applies — the first page gets Next alone, the last gets
+  Previous alone.
+-#}
+{% block content %}
+  {% if page.previous_page or page.next_page %}
+    <nav class="mlap-pagenav" aria-label="Page navigation">
+      {% if page.previous_page %}
+        <a href="{{ page.previous_page.url | url }}" class="mlap-pagenav__link mlap-pagenav__link--prev" rel="prev">
+          <span class="mlap-pagenav__direction">{{ lang.t("footer.previous") }}</span>
+          <span class="mlap-pagenav__title">{{ page.previous_page.title }}</span>
+        </a>
+      {% endif %}
+      {% if page.next_page %}
+        <a href="{{ page.next_page.url | url }}" class="mlap-pagenav__link mlap-pagenav__link--next" rel="next">
+          <span class="mlap-pagenav__direction">{{ lang.t("footer.next") }}</span>
+          <span class="mlap-pagenav__title">{{ page.next_page.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  {% endif %}
+  {{ super() }}
+{% endblock %}
