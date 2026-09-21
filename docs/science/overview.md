@@ -54,7 +54,7 @@ the [Step 4](../user-guide/step4-evaluate.md) configuration that generated it.
 4. `<collection>_data_defn.csv` describes the datasets that collection used
 5. `WildfireDataDefn.xlsx` records which features each training configuration
    included — see
-   [How a collection is assembled](../design-assessment.md#how-a-collection-is-assembled)
+   [How a collection is assembled](../claude-score-card.md#how-a-collection-is-assembled)
 
 Each dataset is identified by its `data_set_count` from
 [Step 1](../user-guide/step1-extract.md), and its extraction configuration is in

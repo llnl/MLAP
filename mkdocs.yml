@@ -76,7 +76,7 @@ plugins:
 
 nav:
   - Home: index.md
-  - Design Assessment: design-assessment.md
+  - Claude Opus Score Card: claude-score-card.md
   - User Guide:
       - Getting Started:
           - Installation: user-guide/installation.md
