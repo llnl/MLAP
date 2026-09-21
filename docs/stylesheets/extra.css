@@ -184,6 +184,19 @@
   --mlap-h6-color: #55a1e3;
 }
 
+/*
+ * Bold at every level. Material ships h1 and h2 at 300 and h3 at 400; h4 to h6
+ * are already 700, so only the top three change.
+ */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-weight: 700;
+}
+
 .md-typeset h1 { color: var(--mlap-h1-color); }
 .md-typeset h2 { color: var(--mlap-h2-color); }
 .md-typeset h3 { color: var(--mlap-h3-color); }
