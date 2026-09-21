@@ -1,0 +1,89 @@
+{#-
+  Overrides material/partials/header.html to show a breadcrumb trail in place
+  of the site name — "User Guide › Getting Started › Running on HPC" rather
+  than "MLAP".
+
+  The trail is built from `page.ancestors`, which MkDocs orders nearest parent
+  first, so it is reversed to read root to leaf. Sections carry no URL, so only
+  the crumbs are text; the whole header title is not a link either way.
+
+  Both of Material's header topics get the same trail. Upstream shows the site
+  name at the top of the page and swaps to the page title once you scroll; with
+  a breadcrumb there is nothing to swap to, so the two are identical and the
+  title stops changing under you as you read.
+
+  Everything else is upstream's file verbatim. On a mkdocs-material upgrade,
+  diff this against material/templates/partials/header.html.
+-#}
+{% set class = "md-header" %}
+{% if "navigation.tabs.sticky" in features %}
+  {% set class = class ~ " md-header--shadow md-header--lifted" %}
+{% elif "navigation.tabs" not in features %}
+  {% set class = class ~ " md-header--shadow" %}
+{% endif %}
+{%- macro breadcrumb() -%}
+  {%- if page and page.ancestors -%}
+    {%- for ancestor in page.ancestors | reverse -%}
+      <span class="mlap-crumb">{{ ancestor.title }}</span>
+      <span class="mlap-crumb__sep">›</span>
+    {%- endfor -%}
+    <span class="mlap-crumb mlap-crumb--current">{{ page.title }}</span>
+  {%- elif page and not page.is_homepage -%}
+    <span class="mlap-crumb mlap-crumb--current">{{ page.title }}</span>
+  {%- else -%}
+    {{ config.site_name }}
+  {%- endif -%}
+{%- endmacro -%}
+<header class="{{ class }}" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            {{ breadcrumb() }}
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            {{ breadcrumb() }}
+          </span>
+        </div>
+      </div>
+    </div>
+    {% if config.theme.palette %}
+      {% if not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+    {% endif %}
+    {% if not config.theme.palette is mapping %}
+      {% include "partials/javascripts/palette.html" %}
+    {% endif %}
+    {% if config.extra.alternate %}
+      {% include "partials/alternate.html" %}
+    {% endif %}
+    {% if "material/search" in config.plugins %}
+      <label class="md-header__button md-icon" for="__search">
+        {% set icon = config.theme.icon.search or "material/magnify" %}
+        {% include ".icons/" ~ icon ~ ".svg" %}
+      </label>
+      {% include "partials/search.html" %}
+    {% endif %}
+    {% if config.repo_url %}
+      <div class="md-header__source">
+        {% include "partials/source.html" %}
+      </div>
+    {% endif %}
+  </nav>
+  {% if "navigation.tabs.sticky" in features %}
+    {% if "navigation.tabs" in features %}
+      {% include "partials/tabs.html" %}
+    {% endif %}
+  {% endif %}
+</header>
