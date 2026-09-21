@@ -19,9 +19,9 @@ validation:
 
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.expand
-    - navigation.footer
     - navigation.top
     - navigation.tracking
     - content.code.copy
