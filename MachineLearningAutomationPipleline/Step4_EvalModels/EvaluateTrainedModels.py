@@ -1,16 +1,8 @@
 #!/usr/bin/env python
-# coding: utf-8
 
-# ## Convert this notebook to executable python script using:
+# Import Modules
 
-# - jupyter nbconvert --to python EvaluateTrainedModels.ipynb
-
-# # Import Modules
-
-# ## Standard Packages
-
-# In[ ]:
-
+# Standard Packages
 
 import os
 import sys
@@ -30,82 +22,50 @@ from timeit import default_timer as timer
 import time
 
 
-# ## User-Defined Functions
-
-# In[ ]:
-
+# User-Defined Functions
 
 current_running_file_dir = sys.path[0]
 current_running_file_par = '/'.join(sys.path[0].split('/')[:-1])
 sys.path.insert(0, os.path.join(current_running_file_par, 'Step3_TrainModel'))
 
 
-# In[ ]:
-
-
 from TrainModel_Helper import *
 
 
-# # Read the Input JSON File
+# Read the Input JSON File
 
-# ### Input file name when using jupyter notebook
-
-# In[ ]:
-
+# Input file name for an interactive run
 
 json_file_eval_models = '/p/lustre2/jha3/Wildfire/Wildfire_LDRD_SI/InputJson/Eval/json_eval_000.json'
 
 
-# ### Input file name when using python script on command line
-
-# In[ ]:
-
+# Input file name taken from the command line
 
 #json_file_eval_models = sys.argv[1]
 
-
-# ### Load the JSON file for evaluating trained models
-
-# In[ ]:
-
+# Load the JSON file for evaluating trained models
 
 print('Loading the JSON file for evaluating trained models: \n {}'.format(json_file_eval_models))
-
-
-# In[ ]:
 
 
 with open(json_file_eval_models) as json_file_handle:
     json_content_eval_models = json.load(json_file_handle)
 
 
-# In[ ]:
-
-
 #json_content_eval_models
 
-
-# # Evaluation Identifier
-
-# In[ ]:
-
+# Evaluation Identifier
 
 eval_count = json_content_eval_models['evaluation']['count']
 identifier_text = json_content_eval_models['evaluation']['identifier_text']
 
 
-# # Simulation Directory
-
-# In[ ]:
-
+# Simulation Directory
 
 sim_dir = json_content_eval_models['paths']['sim_dir']
 
 
-# # Paths and File Names
-
-# In[ ]:
-
+# Paths and File Names
 
 eval_model_base_loc = json_content_eval_models['paths']['eval_model_base_loc']
 eval_model_name = 'eval_%03d_%s'%(eval_count, identifier_text)
@@ -113,17 +73,11 @@ eval_model_loc = os.path.join(eval_model_base_loc, eval_model_name)
 os.system('mkdir -p %s'%eval_model_loc)
 
 
-# # `json` Input Files
-
-# In[ ]:
-
+# `json` Input Files
 
 json_extract_base = json_content_eval_models['paths']['json_extract_base']
 json_prep_base = json_content_eval_models['paths']['json_prep_base']
 json_train_base = json_content_eval_models['paths']['json_train_base']
-
-
-# In[ ]:
 
 
 json_extract_base = os.path.join(sim_dir, json_extract_base)
@@ -131,15 +85,9 @@ json_prep_base = os.path.join(sim_dir, json_prep_base)
 json_train_base = os.path.join(sim_dir, json_train_base)
 
 
-# # Collect Metrics of Desired Trained Models
-
-# In[ ]:
-
+# Collect Metrics of Desired Trained Models
 
 collection_options = json_content_eval_models['collection_options']
-
-
-# In[ ]:
 
 
 json_extract_counts = collection_options['json_extract_counts']
@@ -149,15 +97,9 @@ metric_names = collection_options['metric_names']
 metric_on_sets = collection_options['metric_on_sets']
 
 
-# ## Create label and train pair
-
-# In[ ]:
-
+# Create label and train pair
 
 label_train_pair, col_names = create_label_train_pair (json_prep_train_maps)
-
-
-# In[ ]:
 
 
 #json_extract_counts
@@ -166,31 +108,17 @@ label_train_pair, col_names = create_label_train_pair (json_prep_train_maps)
 #metric_names
 #metric_on_sets
 
-
-# ## Create data definition
-
-# In[ ]:
-
+# Create data definition
 
 data_defn = create_data_definition (json_extract_base, json_extract_counts)
 
 
-# In[ ]:
-
-
 #data_defn
-
-
-# In[ ]:
-
 
 data_defn.to_csv(os.path.join(eval_model_loc, eval_model_name+'_data_defn.csv'),                                    index=False, float_format = '%.4f')
 
 
-# ## Collect evaluation metrics and plot them
-
-# In[ ]:
-
+# Collect evaluation metrics and plot them
 
 for metric_name in metric_names:
     for metric_on_set in metric_on_sets:
@@ -199,4 +127,3 @@ for metric_name in metric_names:
 
         create_bar_plots (df_metrics, FM_label_type, metric_name, metric_on_set,                                            eval_model_loc, eval_model_name)
         create_heatmap (df_metrics, FM_label_type, metric_name, metric_on_set,                                            eval_model_loc, eval_model_name)
-
