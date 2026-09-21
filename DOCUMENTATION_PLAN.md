@@ -6,7 +6,8 @@ built and to set out what remains.
 ## 1. Status
 
 The documentation site is **built and live**. Seventeen pages covering a user
-guide, a scientific assessment, a design assessment and a contributing guide.
+guide, a scientific assessment, the Claude Opus score card and a contributing
+guide.
 
 | | |
 |---|---|

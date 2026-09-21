@@ -17,7 +17,7 @@ at the development mirror, which is built from the same sources:
 - [User Guide](https://pkjha-aero.github.io/Wildfire_ML/user-guide/installation/) — installation and a page per pipeline step
 - [JSON Reference](https://pkjha-aero.github.io/Wildfire_ML/user-guide/json-reference/) — every input parameter, searchable
 - [Scientific Assessment](https://pkjha-aero.github.io/Wildfire_ML/science/overview/) — what the simulations show
-- [Design Assessment](https://pkjha-aero.github.io/Wildfire_ML/design-assessment/) — independent review of the automation architecture
+- [Claude Opus Score Card](https://pkjha-aero.github.io/Wildfire_ML/claude-score-card/) — independent review of the automation architecture by Claude Opus 5
 
 # Results archive
 

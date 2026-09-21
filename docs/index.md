@@ -18,7 +18,7 @@ run and interpreted without hand-editing code.
     history of driving variables preceding it on a spatiotemporal grid. Other
     atmospheric-science problems of that shape can use the same machinery with
     different variables — see
-    [Applicability beyond wildfire](design-assessment.md#applicability-beyond-wildfire)
+    [Applicability beyond wildfire](claude-score-card.md#applicability-beyond-wildfire)
     for what transfers unchanged and what would need code.
 
 ## The pipeline
@@ -103,12 +103,13 @@ The [Science with MLAP](science/overview.md) section documents what the
 simulations show: how prediction accuracy responds to data sampling, history
 parameters, ML hyperparameters, and the choice of physical quantities.
 
-## Design assessment
+## Claude Opus score card
 
 !!! success "Independently reviewed — 9.5/10 for automation design"
 
     MLAP's naming conventions exist to keep large parametric studies
-    interpretable long after they are run. An independent review tested that
+    interpretable long after they are run. An independent review by
+    **[Claude Opus 5](https://www.anthropic.com/claude/opus)** tested that
     claim directly: given the source code and the results archive, and no access
     to the machine that produced them, could every number be traced back to the
     configuration that generated it?
@@ -124,10 +125,11 @@ parameters, ML hyperparameters, and the choice of physical quantities.
     - **Fourteen parameter studies** existing only as output, never written up,
       were recovered in full
 
-    The review scores each criterion and states what would close the remaining
-    gap.
+    The review scores each criterion, states what would close the remaining
+    gap, and reads the same evidence for
+    [what it says about the author](claude-score-card.md#deciphering-the-authors-architecting-and-research-skills).
 
-    [Read the full assessment](design-assessment.md){ .md-button .md-button--primary }
+    [Read the score card](claude-score-card.md){ .md-button .md-button--primary }
 
 ## Project, repository, and authorship
 

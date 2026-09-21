@@ -1,8 +1,8 @@
-# Design Assessment
+# Claude Opus Score Card
 
-An independent review of MLAP's automation architecture, conducted by Claude
-(Opus 5) while building this documentation, and revised after the author
-responded to each point.
+An independent review of MLAP's automation architecture, conducted by
+**[Claude Opus 5](https://www.anthropic.com/claude/opus)** while building this
+documentation, and revised after the author responded to each point.
 
 It is recorded here because it explains **why the pipeline is structured the way
 it is** — the nomenclature conventions described in
@@ -43,16 +43,17 @@ specific problem, and the review is direct evidence that they solve it.
 The two items in bold are what separate 9.5 from 10. Both are additive — neither
 requires changing the design.
 
-A third gap, that the experiment registry was not distributed with the results,
-was closed after this review: the registry now ships inside the archive
-alongside the inputs and outputs.
+A third gap, that the
+[experiment registry](science/overview.md#results-archive) was not distributed
+with the results, was closed after this review: the registry now ships inside
+the archive alongside the inputs and outputs.
 
 ## The test
 
-The reviewer was given the repository and the
-[results archive](science/overview.md#results-archive) — roughly 8,600 output
-files — with no access to the machine that produced them, no notebook of record,
-and no explanation of the naming conventions.
+**[Claude Opus 5](https://www.anthropic.com/claude/opus)** was given the
+repository and the [results archive](science/overview.md#results-archive) —
+roughly 8,600 output files — with no access to the machine that produced them,
+no notebook of record, and no explanation of the naming conventions.
 
 | Artifact | Count |
 |---|---|
@@ -61,10 +62,10 @@ and no explanation of the naming conventions.
 | Step 4 metric CSVs | 757 |
 | Archived input configurations | 20 |
 
-The experiment registry was **not** available during this test. Everything below
-was reconstructed from filenames, configurations and CSVs alone, which is a
-harder starting point than a recipient of the archive faces today — the registry
-now ships with it.
+The [experiment registry](science/overview.md#results-archive) was **not**
+available during this test. Everything below was reconstructed from filenames,
+configurations and CSVs alone, which is a harder starting point than a recipient
+of the archive faces today — the registry now ships with it.
 
 The question was whether the provenance design would allow **which configuration
 produced which number** to be reconstructed from the artifacts alone.
@@ -334,6 +335,105 @@ hundreds of configurations, it is in all of them.
 
 Both gaps are in the code rather than the packaging, and both are additive.
 
+## Deciphering the author's architecting and research skills
+
+The rest of this page scores the pipeline. This section asks a different
+question of the same evidence: what do the artifacts say about the person who
+produced them?
+
+**Researcher first, software architect a close second.**
+
+| Competency | What the evidence shows | Read |
+|---|---|---|
+| **Research design** | 27 evaluation collections whose names and numbering trace a deliberate sequence — establish the data, then the physics, then the model | **Strong** |
+| **Architecting** | Nomenclature, exhaustive metric capture and verification gates — decisions that pay off only years later, held without exception across 6,045 training outputs | **Strong** |
+
+### The archive reads as a research programme, not a set of runs
+
+Collection numbering is chronological, so the archive records the order in which
+questions were asked. Grouped by what each one tests:
+
+| Collections | Question being asked |
+|---|---|
+| `eval_002`, `eval_003` | Is there enough data — sampled in time, and in space? |
+| `eval_004`–`eval_010`, `eval_012` | Which physical quantities carry the signal? |
+| `eval_011`, `eval_026` | How far back must history reach, and how finely must it be resolved? |
+| `eval_014`–`eval_017` | Random Forest hyperparameters |
+| `eval_018`–`eval_025` | MLP hyperparameters |
+
+The sequence is **data → physics → model**, and it is the right one. Data
+sufficiency is settled before asking which variables matter, and both are settled
+before any effort goes into tuning. Hyperparameter studies — the most tempting
+place to start, and the least informative — were run last. The two model families
+are also swept symmetrically: four Random Forest studies, eight MLP studies, the
+same metrics on both, which is what makes the MLP shortfall attributable to the
+model rather than to uneven effort.
+
+Two further tells:
+
+- **Collections were superseded, not accumulated.** `eval_006` through `eval_010`
+  each vary one feature substitution in isolation; `eval_012` asks the same
+  question as a single combined comparison and replaces them. The earlier
+  collections were kept but stopped being cited — a revised question, not a
+  discarded run.
+- **The ML work is instrumental.** `Trends/` holds fuel-moisture series for four
+  climate epochs — 2015–2020, 2029–2034, 2044–2049 and 2094–2099. The pipeline
+  is not the object of study; a projection out to end-of-century is.
+
+### The architecture is scar tissue, not pattern-following
+
+The load-bearing design decisions are not generic software patterns. Each solves
+a problem that is only visible to someone who has personally lost time to it:
+
+- **Exhaustive metric capture at Step 3, selective aggregation at Step 4.** Seven
+  metrics on four evaluation sets are recorded for every model whether asked for
+  or not. This is what allowed the MLP diagnosis, from data collected eighteen
+  months earlier for another purpose.
+- **A (dataset, label, model) triple in every filename.** The
+  highest-leverage decision in the codebase.
+- **Verification gates between stages.** Initially misread by this review as a
+  missing dependency chain. They are the opposite: a flawed extraction must not
+  be able to propagate silently into trained models.
+
+That these are deliberate rather than accidental is itself visible in the
+archive. The conventions hold **without exception** across 27 collections and
+6,045 training outputs; accidental discipline does not survive at that scale.
+
+### Where implementation effort was not spent
+
+| Measure | Value |
+|---|---|
+| Lines of Python, across 11 files | 6,341 |
+| Docstrings | **0** |
+| `raise` / `try` / `except` constructs | **9** |
+| `os.system` calls | 21 |
+| Test files | **0** |
+
+Every item on that list is invisible to a single expert user who holds the whole
+system in their head, and every one becomes expensive the moment a second person
+— or a future self — needs it. This is a rational allocation of effort by someone
+whose output is *findings* rather than software, and it is confined to the
+implementation: none of it reaches the design.
+
+It is also why the two gaps separating 9.5 from 10 matter more than their size
+suggests. Code-version provenance and pre-submission validation are both about
+**the system surviving without its author** — precisely the axis on which a
+researcher's incentives are weakest and the payoff is largest.
+
+!!! note "How this read was formed"
+    From the same basis as the rest of the page — the source code and the results
+    archive — plus the author's responses to the twelve points originally held
+    against a perfect score.
+
+    Those responses are themselves evidence. Not one was defended on
+    software-engineering grounds; every rebuttal was domain reasoning. The
+    `U10`/`V10` conditional exists because the quantity of interest is wind
+    magnitude. The `action` modes exist because extraction must be confirmed
+    sound before anything downstream can be trusted. Collections are curated by
+    hand because the next question depends on what the last one showed. Four of
+    the twelve were rebutted or reclassified on that basis, and two materially
+    reduced.
+
 ## Summary
 
 | Aspect | Assessment |
@@ -348,7 +448,7 @@ Both gaps are in the code rather than the packaging, and both are additive.
 | Code-version provenance | Absent |
 | Pre-submission validation | Absent |
 
-The costly things to get right in a pipeline like this are the ones MLAP got
+**The costly things to get right in a pipeline like this are the ones MLAP got
 right. Nomenclature, result aggregation and exhaustive metric capture are
-architectural: retrofitting them into a mature codebase is painful. The remaining
-gaps are additive and can be closed without disturbing the design.
+architectural: retrofitting them into a mature codebase is painful.** The
+remaining gaps are additive and can be closed without disturbing the design.
