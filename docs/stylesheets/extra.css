@@ -155,7 +155,7 @@
 }
 
 /*
- * Heading colours: one blue ramp, graded by level.
+ * Heading colours: one brown ramp, graded by level.
  *
  * In the light scheme the ramp runs dark to light as headings get deeper, so
  * depth reads as decreasing weight. In the slate scheme it is inverted — light
@@ -167,21 +167,21 @@
  */
 
 :root {
-  --mlap-h1-color: #061e33;
-  --mlap-h2-color: #093255;
-  --mlap-h3-color: #0d4677;
-  --mlap-h4-color: #115998;
-  --mlap-h5-color: #1469b3;
-  --mlap-h6-color: #1675c9;
+  --mlap-h1-color: #2c180a;
+  --mlap-h2-color: #4a2811;
+  --mlap-h3-color: #673818;
+  --mlap-h4-color: #84471f;
+  --mlap-h5-color: #9c5424;
+  --mlap-h6-color: #ae5e29;
 }
 
 [data-md-color-scheme="slate"] {
-  --mlap-h1-color: #cbe2f7;
-  --mlap-h2-color: #b3d5f3;
-  --mlap-h3-color: #99c6ee;
-  --mlap-h4-color: #7eb8ea;
-  --mlap-h5-color: #66abe6;
-  --mlap-h6-color: #55a1e3;
+  --mlap-h1-color: #edddcf;
+  --mlap-h2-color: #e4cdb8;
+  --mlap-h3-color: #dbbca0;
+  --mlap-h4-color: #d2ab88;
+  --mlap-h5-color: #ca9c73;
+  --mlap-h6-color: #c49164;
 }
 
 /*
@@ -235,9 +235,10 @@
 .md-typeset .mlap-pagenav {
   background: var(--md-default-bg-color);
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
-  display: flex;
+  align-items: start;
+  display: grid;
   gap: 1rem;
-  justify-content: space-between;
+  grid-template-columns: 1fr auto 1fr;
   margin: 0 0 1.4rem;
   padding-bottom: .5rem;
   padding-top: .6rem;
@@ -265,16 +266,31 @@
   --md-scroll-margin: 6.4rem;
 }
 
-.md-typeset .mlap-pagenav__link {
+/*
+ * A three-column grid rather than space-between, so the current page stays
+ * centred on the strip even where Previous is missing. Each slot is placed on
+ * its own column explicitly, for the same reason.
+ */
+.md-typeset .mlap-pagenav__link,
+.md-typeset .mlap-pagenav__current {
   display: flex;
   flex-direction: column;
   gap: .1rem;
-  max-width: 48%;
 }
 
-/* Keeps Next hard right when Previous is absent, as on the first page */
+.md-typeset .mlap-pagenav__link--prev {
+  grid-column: 1;
+}
+
+.md-typeset .mlap-pagenav__current {
+  color: var(--md-default-fg-color);
+  grid-column: 2;
+  text-align: center;
+}
+
 .md-typeset .mlap-pagenav__link--next {
-  margin-left: auto;
+  grid-column: 3;
+  justify-self: end;
   text-align: right;
 }
 
@@ -298,20 +314,23 @@
   content: " →";
 }
 
-/* Stack on narrow screens, keeping each link on its own side */
+/* Stack on narrow screens: one slot per row, in reading order */
 @media screen and (max-width: 30em) {
   .md-typeset .mlap-pagenav {
-    flex-direction: column;
     gap: .5rem;
+    grid-template-columns: 1fr;
   }
 
-  .md-typeset .mlap-pagenav__link {
-    max-width: 100%;
+  .md-typeset .mlap-pagenav__link--prev,
+  .md-typeset .mlap-pagenav__current,
+  .md-typeset .mlap-pagenav__link--next {
+    grid-column: 1;
+    justify-self: stretch;
   }
 
-  /* Stacked, the strip is roughly one line taller */
+  /* Stacked, the strip runs to three rows */
   .md-typeset :target {
-    --md-scroll-margin: 8.4rem;
+    --md-scroll-margin: 10.4rem;
   }
 }
 
