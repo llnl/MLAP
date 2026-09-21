@@ -155,7 +155,7 @@
 }
 
 /*
- * Heading colours: one blue ramp, graded by level.
+ * Heading colours: one brown ramp, graded by level.
  *
  * In the light scheme the ramp runs dark to light as headings get deeper, so
  * depth reads as decreasing weight. In the slate scheme it is inverted — light
@@ -167,21 +167,21 @@
  */
 
 :root {
-  --mlap-h1-color: #061e33;
-  --mlap-h2-color: #093255;
-  --mlap-h3-color: #0d4677;
-  --mlap-h4-color: #115998;
-  --mlap-h5-color: #1469b3;
-  --mlap-h6-color: #1675c9;
+  --mlap-h1-color: #2c180a;
+  --mlap-h2-color: #4a2811;
+  --mlap-h3-color: #673818;
+  --mlap-h4-color: #84471f;
+  --mlap-h5-color: #9c5424;
+  --mlap-h6-color: #ae5e29;
 }
 
 [data-md-color-scheme="slate"] {
-  --mlap-h1-color: #cbe2f7;
-  --mlap-h2-color: #b3d5f3;
-  --mlap-h3-color: #99c6ee;
-  --mlap-h4-color: #7eb8ea;
-  --mlap-h5-color: #66abe6;
-  --mlap-h6-color: #55a1e3;
+  --mlap-h1-color: #edddcf;
+  --mlap-h2-color: #e4cdb8;
+  --mlap-h3-color: #dbbca0;
+  --mlap-h4-color: #d2ab88;
+  --mlap-h5-color: #ca9c73;
+  --mlap-h6-color: #c49164;
 }
 
 /*
