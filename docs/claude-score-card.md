@@ -20,10 +20,50 @@ specific problem, and the review is direct evidence that they solve it.
     Draft papers covering the pipeline and the science exist but are work in
     progress and unpublished, so nothing here depends on them.
 
-    The review covers the pipeline **as it stood in September 2024** — the most
-    recent functional change to the source is dated August 2024. Everything
-    added since is documentation; no assessment here reflects a change to the
-    code itself.
+    **What was assessed.** The code reviewed is
+    [`v1.0`](https://github.com/LLNL/MLAP/releases/tag/v1.0), the project's
+    first and only release —
+    commit [`0c0714a`](https://github.com/LLNL/MLAP/commit/0c0714adb1d7d9a825ec5f30f5448b4b295cd282),
+    dated **18 September 2024**. The assessment was carried out on
+    **18 September 2026** and revised on **20 September 2026** after the author
+    responded to each point.
+
+    **What has changed since.** Everything added between the release and the
+    assessment was documentation and presentation — the site you are reading,
+    its styling and navigation. No scoring here reflects a change to the
+    pipeline itself.
+
+    One functional change has been made since the assessment, on
+    **21 September 2026**: the seven step scripts now read their JSON input
+    paths from `sys.argv` rather than from hardcoded absolute paths. It touches
+    16 assignments and nothing else — undo it and every module is logically
+    identical to `v1.0`. It changes none of the ratings, and in particular it
+    is unrelated to the **Input validation** gap below, which is about checking
+    the *contents* of a configuration before submission and remains open.
+
+    **The two input modes were deliberate.** A fixed path suits interactive
+    work; command-line arguments suit batch submission. `v1.0` carries both,
+    each under its own label, so the distinction was drawn at the time and not
+    in hindsight. The archive shows which mode actually ran: the tagged script
+    hardcodes `json_extract_data_000.json`, yet Step 3 output covers **76
+    distinct dataset indices**, `dataset_000` through `dataset_093`. Had the
+    committed file been the one executed, every run would have written the same
+    names over the last. What was committed was the script as generated from
+    the notebook, carrying the notebook's own setting; the `argv` line was left
+    commented there by oversight. The change above restores the intended
+    arrangement rather than introducing it.
+
+    **The circumstances the code was written in.** The project's scope was to
+    produce analysed data and papers. The automation pipeline was the author's
+    own initiative within that, not a funded deliverable, and one person
+    covered the data engineering, the computational physics, the software
+    development, the analysis and the writing. Practices that would have caught
+    a stale committed script — tests, continuous integration — were understood
+    but did not fit the time available. Worth recording too: **no version of
+    Claude Code existed when `v1.0` was released** in September 2024. It first
+    appeared as a research preview in February 2025. The documentation and the
+    review on this site were produced two years after the code, with tooling
+    that was not available while it was being written.
 
 ## How this was scored
 
