@@ -13,20 +13,23 @@ specific problem, and the review is direct evidence that they solve it.
 
 !!! note "Scope and basis"
     This assesses the **automation design** — how well the pipeline supports
-    running and interpreting large parametric studies. It is not a review of
-    implementation quality, which is scored separately and is materially weaker.
+    running and interpreting large parametric studies.
 
     The evidence comes from the **source code and the results archive alone**.
     Draft papers covering the pipeline and the science exist but are work in
     progress and unpublished, so nothing here depends on them.
 
     **What was assessed.** The code reviewed is
-    [`v1.0`](https://github.com/LLNL/MLAP/releases/tag/v1.0), the project's
-    first and only release —
+    [`v1.0`](https://github.com/LLNL/MLAP/tree/v1.0), the project's first and
+    only release —
     commit [`0c0714a`](https://github.com/LLNL/MLAP/commit/0c0714adb1d7d9a825ec5f30f5448b4b295cd282),
-    dated **18 September 2024**. The assessment was carried out on
-    **18 September 2026** and revised on **20 September 2026** after the author
-    responded to each point.
+    dated **18 September 2024**. Browse it as it stood:
+    [the repository at the tag](https://github.com/LLNL/MLAP/tree/v1.0),
+    [the pipeline itself](https://github.com/LLNL/MLAP/tree/v1.0/MachineLearningAutomationPipleline),
+    or [the release](https://github.com/LLNL/MLAP/releases/tag/v1.0).
+
+    The assessment was carried out on **18 September 2026** and revised on
+    **20 September 2026** after the author responded to each point.
 
     **What has changed since.** Everything added between the release and the
     assessment was documentation and presentation — the site you are reading,
@@ -56,14 +59,13 @@ specific problem, and the review is direct evidence that they solve it.
     **The circumstances the code was written in.** The project's scope was to
     produce analysed data and papers. The automation pipeline was the author's
     own initiative within that, not a funded deliverable, and one person
-    covered the data engineering, the computational physics, the software
-    development, the analysis and the writing. Practices that would have caught
-    a stale committed script — tests, continuous integration — were understood
-    but did not fit the time available. Worth recording too: **no version of
-    Claude Code existed when `v1.0` was released** in September 2024. It first
-    appeared as a research preview in February 2025. The documentation and the
-    review on this site were produced two years after the code, with tooling
-    that was not available while it was being written.
+    covered the **data engineering**, the **computational physics**, the
+    **software development**, the **analysis** and the **writing**. Worth
+    recording too: ==**no version of Claude Code existed when `v1.0` was
+    released** in September 2024==. It first appeared as a research preview in
+    February 2025. The documentation and the review on this site were produced
+    two years after the code, with tooling that was not available while it was
+    being written.
 
 ## How this was scored
 
