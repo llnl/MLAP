@@ -372,3 +372,25 @@
   margin: 0 .35em;
   opacity: .6;
 }
+
+/*
+ * Highlighted text (==like this==, via pymdownx.mark). Material paints only the
+ * background and leaves the text colour alone, so the ground is what carries
+ * the emphasis: a warm amber, picked to sit with the brown heading ramp rather
+ * than against it.
+ *
+ * Body text reads at 13.4:1 on the light ground and 7.2:1 on the dark one.
+ */
+:root {
+  --md-typeset-mark-color: #ffe9b0;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-typeset-mark-color: #5c4618;
+}
+
+/* Inline code inside a highlight keeps the amber, not its own white chip */
+.md-typeset mark code {
+  background-color: transparent;
+  border-color: #0000001f;
+}
