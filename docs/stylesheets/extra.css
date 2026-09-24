@@ -173,6 +173,11 @@
   --mlap-h4-color: #84471f;
   --mlap-h5-color: #9c5424;
   --mlap-h6-color: #ae5e29;
+
+  --mlap-pagenav-fill: #dbeeff;
+  --mlap-pagenav-fill-hover: #c3e2fb;
+  --mlap-pagenav-fg: #12547f;
+  --mlap-pagenav-label: #3d6f96;
 }
 
 [data-md-color-scheme="slate"] {
@@ -182,6 +187,11 @@
   --mlap-h4-color: #d2ab88;
   --mlap-h5-color: #ca9c73;
   --mlap-h6-color: #c49164;
+
+  --mlap-pagenav-fill: #1e3a52;
+  --mlap-pagenav-fill-hover: #275070;
+  --mlap-pagenav-fg: #a8d8f5;
+  --mlap-pagenav-label: #8ab8d8;
 }
 
 /*
@@ -265,11 +275,29 @@
   --md-scroll-margin: 6.4rem;
 }
 
+/*
+ * Light blue buttons. The colour is carried by a pale fill rather than by the
+ * text: no light blue clears 4.5:1 as text on white — the palest that passes is
+ * already a mid blue — so a pale ground with dark blue text is what makes the
+ * control read as light blue and stay legible. Text sits at 6.8:1 on the light
+ * fill and 7.8:1 on the dark one.
+ */
 .md-typeset .mlap-pagenav__link {
+  background: var(--mlap-pagenav-fill);
+  border-radius: .3rem;
+  color: var(--mlap-pagenav-fg);
   display: flex;
   flex-direction: column;
   gap: .1rem;
   max-width: 48%;
+  padding: .3rem .5rem;
+  transition: background-color .2s;
+}
+
+.md-typeset .mlap-pagenav__link:hover,
+.md-typeset .mlap-pagenav__link:focus {
+  background: var(--mlap-pagenav-fill-hover);
+  color: var(--mlap-pagenav-fg);
 }
 
 /* Keeps Next hard right when Previous is absent, as on the first page */
@@ -278,8 +306,12 @@
   text-align: right;
 }
 
+/*
+ * The label is dimmed against the title, as before, but tinted to the button's
+ * own blue rather than the page's grey — still 4.5:1 on either fill.
+ */
 .md-typeset .mlap-pagenav__direction {
-  color: var(--md-default-fg-color--light);
+  color: var(--mlap-pagenav-label);
   font-size: .72em;
   letter-spacing: .04em;
   text-transform: uppercase;
