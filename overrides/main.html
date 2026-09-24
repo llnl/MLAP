@@ -10,8 +10,7 @@
   `page.previous_page` and `page.next_page` are MkDocs page attributes and are
   set from `nav:` order regardless of the feature flag, so each link is emitted
   only where it applies — the first page gets Next alone, the last gets
-  Previous alone. The centre slot always carries the current page, so the strip
-  says where you are as well as where you can go.
+  Previous alone.
 -#}
 {% block content %}
   {% if page.previous_page or page.next_page %}
@@ -22,10 +21,6 @@
           <span class="mlap-pagenav__title">{{ page.previous_page.title }}</span>
         </a>
       {% endif %}
-      <span class="mlap-pagenav__current">
-        <span class="mlap-pagenav__direction">Current</span>
-        <span class="mlap-pagenav__title">{{ page.title }}</span>
-      </span>
       {% if page.next_page %}
         <a href="{{ page.next_page.url | url }}" class="mlap-pagenav__link mlap-pagenav__link--next" rel="next">
           <span class="mlap-pagenav__direction">{{ lang.t("footer.next") }}</span>
