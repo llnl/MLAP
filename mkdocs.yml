@@ -103,3 +103,4 @@ nav:
           - Multi-layer Perceptron: science/mlp.md
   - Development:
       - Contributing: development/contributing.md
+      - Optimizations in the Source: development/optimizations.md
